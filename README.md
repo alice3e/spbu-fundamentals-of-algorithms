@@ -31,7 +31,7 @@ python -c "import sys; print('\n'.join(sys.path))"
 *Note: python inside your console and inside your PyCharm/Jupyter/DataSpell may be different so run commands in terminal of this app*
 
 Another way to check your PYTHONPATH (most accurate)
-paste this code (first line) in some .py file in dfs.py (practicum_2) and run the file
+paste this code (first line) in some .py file (for example: dfs.py (practicum_2) )and run the file
 ```python
 print(sys.path) # you should see /Users/path_to_your_github_clone_directory
 ```
