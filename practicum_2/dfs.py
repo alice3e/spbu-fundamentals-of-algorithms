@@ -1,9 +1,9 @@
-
 import queue
 from typing import Any
-import networkx as nx
-import src.plotting
 
+import networkx as nx
+
+from src.plotting import plot_graph
 
 
 def visit(node: Any):
@@ -34,24 +34,9 @@ def dfs_recursive_postorder(G: nx.DiGraph, node: Any, visited: dict[Any]) -> Non
     pass
 
 
-def plot_graph(G):
-    options = dict(
-        font_size=12,
-        node_size=500,
-        node_color="white",
-        edgecolors="black",
-    )
-    # Очень важно выбрать правильный layout
-    pos = nx.spring_layout(G)
-    nx.draw_networkx(G, pos, **options)
-
-    if(nx.is_weighted(G)): # явно указываем что надо достать веса из G
-        labels = {e: G.edges[e]["weight"] for e in G.edges}
-        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
-
 if __name__ == "__main__":
     # Load and plot the graph
-    G = nx.read_edgelist("../practicum_2/graph_2.edgelist", create_using=nx.Graph)
+    G = nx.read_edgelist("practicum_2/graph_2.edgelist", create_using=nx.Graph)
     # plot_graph(G)
 
     # 1. Recursive DFS. Trivial to implement, but it does not scale on large graphs
@@ -72,11 +57,9 @@ if __name__ == "__main__":
     # If a directed graph represent tasks to be done, the topological sort tells
     # us what the task order should be, i.e. scheduling
     # Postorder DFS outputs the reversed order!
-    G = nx.read_edgelist("../practicum_2/graph_2.edgelist", create_using=nx.DiGraph)
+    G = nx.read_edgelist("practicum_2/graph_2.edgelist", create_using=nx.DiGraph)
     plot_graph(G)
     print("Postorder iterative DFS")
     print("-" * 32)
     visited = {n: False for n in G}
     dfs_recursive_postorder(G, node="0", visited=visited)
-
-#%%
