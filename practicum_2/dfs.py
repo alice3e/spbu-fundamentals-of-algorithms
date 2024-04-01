@@ -9,12 +9,24 @@ from src.plotting import plot_graph
 def visit(node: Any):
     print(f"Wow, it is {node} right here!")
 
+def dfs_recursive(G: nx.Graph, node_name: Any, visited: dict[Any]) -> None:
+    edge_highlight = []
+    stack = []
+    stack.append(node_name)
+    visited[stack[0]] = True
+    while(len(stack) != 0):
+        print("Node -",stack[0], "neigbors - ", list(nx.all_neighbors(G,stack[0])))
 
-def dfs_recursive(G: nx.Graph, node: Any, visited: dict[Any]) -> None:
-    ##########################
-    ### PUT YOUR CODE HERE ###
-    ##########################
+        for i in nx.all_neighbors(G,stack[0]):
+            edge_highlight.append( (stack[0] , i) )
+            visited[stack[0]] = True
+            if(visited[i] == False):
+                stack.append(i)
 
+        print(stack)
+        stack.pop(0)
+        plot_graph(G, highlighted_edges=edge_highlight)
+    return edge_highlight
     pass
 
 
@@ -36,30 +48,31 @@ def dfs_recursive_postorder(G: nx.DiGraph, node: Any, visited: dict[Any]) -> Non
 
 if __name__ == "__main__":
     # Load and plot the graph
-    G = nx.read_edgelist("practicum_2/graph_2.edgelist", create_using=nx.Graph)
-    # plot_graph(G)
+    G = nx.read_edgelist("graph_2.edgelist", create_using=nx.Graph)
+    plot_graph(G)
 
     # 1. Recursive DFS. Trivial to implement, but it does not scale on large graphs
     # In the debug mode, look at the call stack
     print("Recursive DFS")
     print("-" * 32)
     visited = {n: False for n in G}
-    dfs_recursive(G, node="0", visited=visited)
+    dfs_recursive(G, node_name=list(nx.nodes(G))[0], visited=visited)
+    #highlighted_edges = dfs_recursive(G, node_name="0", visited=visited)
     print()
-
+    #plot_graph(G, highlighted_edges=highlighted_edges)
     # 2. Iterative DFS. Makes use of LIFO/stack data structure, does scale on large graphs
-    print("Iterative DFS")
-    print("-" * 32)
-    dfs_iterative(G, node="0")
-    print()
+    # print("Iterative DFS")
+    # print("-" * 32)
+    # dfs_iterative(G, node="0")
+    # print()
 
     # 3. Postorder recursive DFS for topological sort
     # If a directed graph represent tasks to be done, the topological sort tells
     # us what the task order should be, i.e. scheduling
     # Postorder DFS outputs the reversed order!
-    G = nx.read_edgelist("practicum_2/graph_2.edgelist", create_using=nx.DiGraph)
-    plot_graph(G)
-    print("Postorder iterative DFS")
-    print("-" * 32)
-    visited = {n: False for n in G}
-    dfs_recursive_postorder(G, node="0", visited=visited)
+    # G = nx.read_edgelist("graph_2.edgelist", create_using=nx.DiGraph)
+    # plot_graph(G)
+    # print("Postorder iterative DFS")
+    # print("-" * 32)
+    # visited = {n: False for n in G}
+    # dfs_recursive_postorder(G, node="0", visited=visited)
