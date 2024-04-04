@@ -11,7 +11,7 @@ def plot_graph(
     G: Union[nx.Graph, nx.DiGraph], highlighted_edges: list[tuple[Any, Any]] = None, highlighted_nodes: list[tuple[Any]] = None
 ) -> None:
     fig, ax = plt.subplots(figsize=(12, 6))
-    pos = nx.spring_layout(G)
+    pos = nx.shell_layout(G)
     edge_color_list = ["black"] * len(G.edges)
     node_color_list = ["white"] * len(G.nodes)
     if highlighted_edges:
