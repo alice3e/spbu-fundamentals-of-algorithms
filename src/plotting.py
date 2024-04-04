@@ -8,19 +8,24 @@ from numpy.typing import NDArray
 
 
 def plot_graph(
-    G: Union[nx.Graph, nx.DiGraph], highlighted_edges: list[tuple[Any, Any]] = None
+        G: Union[nx.Graph, nx.DiGraph], highlighted_edges: list[tuple[Any, Any]] = None, highlighted_nodes: list[tuple[Any]] = None
 ) -> None:
     fig, ax = plt.subplots(figsize=(12, 6))
-    pos = nx.spring_layout(G)
+    pos = nx.shell_layout(G)
     edge_color_list = ["black"] * len(G.edges)
+    node_color_list = ["white"] * len(G.nodes)
     if highlighted_edges:
         for i, edge in enumerate(G.edges()):
             if edge in highlighted_edges or (edge[1], edge[0]) in highlighted_edges:
                 edge_color_list[i] = "red"
+
+    if highlighted_nodes:
+        for i in highlighted_nodes:
+            node_color_list[ list(G.nodes()).index(i) ] = "red"
     options = dict(
         font_size=12,
         node_size=500,
-        node_color="white",
+        node_color=node_color_list,
         edgecolors="black",
         edge_color=edge_color_list,
     )
