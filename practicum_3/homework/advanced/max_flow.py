@@ -5,7 +5,8 @@ import networkx as nx
 
 def max_flow(G: nx.Graph, s: Any, t: Any) -> int:
     value: int = 0
-    
+    # weight - макс пропуск способ
+    # ДЗ найти еще более сложные графы и поиграть с ними
     ##########################
     ### PUT YOUR CODE HERE ###
     ##########################
