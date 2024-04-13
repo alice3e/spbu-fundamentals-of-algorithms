@@ -13,108 +13,44 @@ Go to `Run and Debug` in the left panel, create a new launch file, select `Pytho
     "PYTHONPATH": "${workspaceFolder}${pathSeparator}${env:PYTHONPATH}"
 }
 ```
-### MacOs (homebrew or python.app)
-Go to `Terminal.app` and paste this command:
-```bash
-export PYTHONPATH=/Users/path_to_your_github_clone_directory:$PYTHONPATH
-```
-### MacOs (anaconda3 or miniconda)
-Go to `Terminal.app` and paste this command:
-```bash
-conda develop /Users/path_to_your_github_clone_directory
-```
-Then you can check you PYTHONPATH with this command
-```bash
-python -c "import sys; print('\n'.join(sys.path))"
-```
-*Note: python inside your console and inside your PyCharm/Jupyter/DataSpell may be different so run commands in terminal of this app*
-
-Another way to check your PYTHONPATH (most accurate)
-paste this code (first line) in some .py file in dfs.py (practicum_2) and run the file
-```python
-print(sys.path) # you should see /Users/path_to_your_github_clone_directory
-```
-
-
-### MacOs (homebrew or python.app)
-Go to `Terminal.app` and paste this command:
-```bash
-export PYTHONPATH=/Users/path_to_your_github_clone_directory:$PYTHONPATH
-```
-### MacOs (anaconda3 or miniconda)
-Go to `Terminal.app` and paste this command:
-```bash
-conda develop /Users/path_to_your_github_clone_directory
-```
-Then you can check you PYTHONPATH with this command
-```bash
-python -c "import sys; print('\n'.join(sys.path))"
-```
-*Note: python inside your console and inside your PyCharm/Jupyter/DataSpell may be different so run commands in terminal of this app*
-
-Another way to check your PYTHONPATH (most accurate)
-paste this code (first line) in some .py file (for example: practicum_2/dfs.py ) and run the file
-```python
-print(sys.path) # you should see /Users/path_to_your_github_clone_directory
-```
 
 ## Practicum 1
 
-We study basic tools necessary for the rest of the course: `python`, `numpy` and  `matplotlib`. It is assumed that a student has some decent knowledge of python though he/she is not very experienced in it.
+Изучение `python`, `numpy` и  `matplotlib`, необходимых для дальнейшей работы. Предполагается, что студент имеет базовые знания python.
 
-Plan:
-1. Warm-up
-2. Go through `intro_to_numpy_and_matplotlib.ipynb` together
+План:
+1. Выполнить `intro_to_numpy_and_matplotlib.ipynb`
 
 ## Practicum 2
 
-We start working on graph algorithms via introducing `networkx` and then a couple of simple algorithm for graph traversals.
+Начало работы с графовыми и графовыми алгоритмами с помощью `networkx`.
 
-Plan:
-1. Warm-up
-2. Go through `intro_to_networkx.ipynb` together
-3. Complete `bfs_maze_template.py`
-4. Go through `dfs_recursive()` in `dfs_maze.py` together
-5. Complete `dfs_iterative()` in `dfs_maze_template.py`
-6. Complete `topological_sort()` in `dfs_maze_template.py`
-7. Go through `dfs_recursive_postorder()` in `dfs_maze.py` together (solution for point 6)
+План:
+1. Выполнить `intro_to_networkx.ipynb`
+
+Домашнее задание (базовый вариант):
+1. Проверка на наличие циклов в ненаправленном графе: `practicum_2/homework/basic/cycles_in_undirected_graph.py`. Необходимо реализовать функцию `has_cycles`, которая принимает на вход объект графа и возвращает булевское значение, принимающее true при наличии цикла в графе. Предполагается, что, придя в узел n через ребро e в ненаправленном графе, мы можем пойти далее по любому ребру узла n, кроме e.
+
+Домашнее задание (продвинутый вариант):
+1. Проверка на наличие циклов в направленном графе: `practicum_2/homework/advanced/cycles_in_directed_graph.py`. Необходимо реализовать функцию `has_cycles`, которая принимает на вход объект графа и возвращает булевское значение, принимающее true при наличии цикла в графе. Предполагается, что, придя в узел n через ребро e в направленном графе, мы можем пойти далее по любому исходящему ребру узла n.
+
+Дедлайн: 2024.04.06
 
 ## Practicum 3
 
-We study two classical graph problems: Minimum Spanning Tree and Shortest Path. We use Prim's algorithm to solve the former and Dijkstra's algorithm to solve the latter.
+Изучение классических графовых алгоритмов: BFS, DFS, алгоритма Прима для нахождения MST и алгоритма Дейкстры для нахождения кратчайших путей в графе. 
 
-Plan:
-1. Warm-up
-2. Complete `mst_template.py`
-3. Complete `sp_template.py`. We can do both the original version and the version with a priority queue.
+План:
+1. Реализовать рекурсивный DFS в функции `dfs_recursive`, итерационный DFS в функции `dfs_iterative` и топологическую сортировку в функции `dfs_recursive_postorder` в файле `dfs.py`.
+2. Реализовать алгоритм Прима в функции `prim_mst` в файле `mst.py`.
+3. Реализовать базовый алгоритм Дейкстры в функции `dijkstra_sp` и ускорить его с помощью очереди с приоритетом в функции `dijkstra_sp_with_priority_queue` в файле `sp.py`.
 
-## Practicum 4
 
-We study fundamental data structures.
+Домашнее задание (базовый вариант):
+1. Поиск пути в лабиринте: `practicum_3/homework/basic/bfs_maze.py`. Необходимо реализовать метод `Maze.solve`, который ищет путь в лабиринте. Лабиринт хранится в файле `practicum_3/homework/basic/maze_2.txt`, где символ `#` обозначает стену, а `O` и `X` вход и выход соответственно. Цель - построить путь от `O` к `X`. Под путем подразумевается последовательность символов `L` (шаг влево), `R` (шаг вправо), `U` (шаг вверх), `D` (шаг вниз). Например `LLDLLDDR`.
+2. Проверка на корректность раскрытия скобок: `practicum_3/homework/basic/valid_parentheses.py`. Необходимо реализовать класс LIFO очереди `Stack` и затем реализовать функцию `are_parentheses_valid`, которая проверяет, содержит ли строка, переданная на вход и состоящая только из скобок `(`, `)`, `[`, `]`, `{`, `}`, корректно закрывающиеся/открывающиеся скобки. В файле `practicum_3/homework/basic/valid_parentheses_cases.yaml` содержатся корректные и некорректные примеры таких строк. 
 
-Plan:
-1. Warm-up
-2. Complete `valid_parentheses.py` (LIFO)
-3. Complete `time_needed_to_buy_tickets.py` (FIFO)
-4. Complete `linked_list.py` (linked list)
+Домашнее задание (продвинутый вариант):
+1. Нахождение максимального потока в транспортной сети: `practicum_3/homework/advanced/max_flow.py`. Необходимо реализовать функцию `max_flow`, которая принимает на вход объект направленного взвешенного графа (транспортной сети) и возвращает значение максимального потока. Существует множество методов решения этой задачи, так что требуется найти наиболее быстрый метод из доступных. 
 
-Homework:
-1. `time_needed_to_buy_tickets.py`: implement a proper solution for this problem.
-
-## Practicum 5
-
-We study simple computaional geomtery algorithms such as convex hull computing.
-
-Plan:
-1. Warm-up
-2. Complete `slow_convex_hull.py`
-3. Complete `qwer`
-
-Homework:
-1. `convex_bucket.py`: implement a convex hull algorithm constructing only the lower part of a convex hull which would "hold" all the points if they fell due to the gravity.
-
-## Practicum 10
-
-Cubic spline: http://getsomemath.ru/subtopic/computational_mathematics/approximation_theory/local_interpolation
-
-LU: http://getsomemath.ru/subtopic/computational_mathematics/numerical_linear_algebra/gauss_methods
+Дедлайн: 2024.04.20
