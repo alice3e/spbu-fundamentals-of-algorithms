@@ -1,0 +1,1705 @@
+%%
+%% This is file `mathfont.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% mathfont_code.dtx  (with options: `package')
+%% 
+%% This file is file from version 1.6 of the LaTeX package "mathfont,"
+%% to be used in conjunction with the XeTeX or LuaTeX engines.
+%% 
+%% Copyright 2018-2019 by Conrad Kosowsky
+%% 
+%% This file may be distributed and modified under the terms of the
+%% LaTeX Public Project License, version 1.3c or any later version.
+%% The most recent version of this license is available online at
+%% 
+%%            https://www.latex-project.org/lppl/.
+%% 
+%% This work has the LPPL status "maintained," and the current
+%% maintainer is the package author, Conrad Kosowsky. He can be
+%% reached at kosowsky.latex@gmail.com. The work consists of the
+%% following items:
+%% 
+%%   (1) the base file mathfont_code.dtx;
+%% 
+%%   (2) the package code contained in mathfont.sty;
+%% 
+%%   (3) the derived files mathfont_symbol_list.tex,
+%% mathfont_user_guide.tex, mathfont_heading.tex, and
+%% mathfont_doc_patch.tex;
+%% 
+%%   (4) the pdf documentation files mathfont_code.pdf,
+%% mathfont_symbol_list.pdf, and mathfont_user_guide.pdf;
+%% 
+%%   (5) all other files created through the configuration process
+%% such as mathfont.idx and mathfont.ind; and
+%% 
+%%   (6) the associated README.txt file.
+%% 
+%% For more information, see the original mathfont.dtx file. To
+%% install mathfont on your computer, run mathfont_code.dtx through
+%% LaTeX and place the derived file mathfont.sty in a directory
+%% searchable by TeX.
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mathfont}[2019/12/05 v. 1.6 Package mathfont]
+\newif\ifM@font@loaded
+\newif\ifM@special\M@specialtrue
+\newif\ifM@XeTeXLuaTeX
+\def\@gobbletwo@brackets[#1]#2{}
+\def\M@NoMathfontError#1{\PackageError{mathfont}
+  {\MessageBreak Invalid command\MessageBreak
+  \string#1 on line \the\inputlineno}
+  {Your command was ignored. I couldn't\MessageBreak
+  load mathfont successfully, so this\MessageBreak
+  control sequence was never defined.}}
+\def\mathfont{\M@NoMathfontError\mathfont
+  \@ifnextchar[\@gobbletwo@brackets\@gobble}
+\def\setfont{\M@NoMathfontError\setfont\@gobble}
+\def\newmathrm{\M@NoMathfontError\newmathrm\@gobbletwo}
+\def\newmathit{\M@NoMathfontError\newmathit\@gobbletwo}
+\def\newmathbf{\M@NoMathfontError\newmathbf\@gobbletwo}
+\def\newmathbfit{\M@NoMathfontError\newmathbf\@gobbletwo}
+\def\newmathfontcommand{\M@NoMathfontError\newmathfontcommand\@gobblefour}
+\begingroup
+\catcode`\+=\active
+\def+{ }
+\def\M@NoFontspecError{\GenericError{}
+  {\MessageBreak\MessageBreak
+  Package mathfont fatal error:
+  \MessageBreak\MessageBreak
+  +*********************\MessageBreak
+  +*+++++++++++++++++++*\MessageBreak
+  +*++!!FATAL ERROR!!++*\MessageBreak
+  +*+++++++++++++++++++*\MessageBreak
+  +*+++++Could not+++++*\MessageBreak
+  +*+++find+fontspec+++*\MessageBreak
+  +*+++++++++++++++++++*\MessageBreak
+  +*********************\MessageBreak\@gobbletwo}
+  {See the mathfont package documentation for explanation.}
+  {Um, I couldn't find the file fontspec.sty.\MessageBreak
+  The mathfont package is useless without\MessageBreak
+  fontspec, so I'm going to stop reading it\MessageBreak
+  in now. (You won't be able to use any\MessageBreak
+  commands from mathfont in your document.)\MessageBreak
+  To make mathfont work correctly, please\MessageBreak
+  install fontspec on your computer.}}
+\IfFileExists{fontspec.sty}{\endgroup}
+  {\M@NoFontspecError\endgroup
+  \AtEndOfPackage{\typeout{Package mathfont failed to load\on@line}}
+  \endinput}
+\begingroup
+\catcode`\+=\active
+\def+{ }
+\def\M@XeTeXLuaTeXError{\GenericError{}
+  {\MessageBreak\MessageBreak
+  Package mathfont fatal error:
+  \MessageBreak\MessageBreak
+  +*********************\MessageBreak
+  +*+++++++++++++++++++*\MessageBreak
+  +*++!!FATAL ERROR!!++*\MessageBreak
+  +*+++++++++++++++++++*\MessageBreak
+  +*+++Missing XeTeX+++*\MessageBreak
+  +*+++++or LuaTeX+++++*\MessageBreak
+  +*+++++++++++++++++++*\MessageBreak
+  +*********************\MessageBreak\@gobbletwo}
+  {See the mathfont package documentation for explanation.}
+  {I need XeTeX or LuaTeX to make this\MessageBreak
+  package work properly. It looks like the\MessageBreak
+  current engine is something else, so I'm\MessageBreak
+  going to stop reading in the package file\MessageBreak
+  now. (You won't be able to use commands\MessageBreak
+  from mathfont in your document.) To make\MessageBreak
+  mathfont work correctly, please retypeset\MessageBreak
+  this file with one of those two engines.}}
+\ifx\Umathcode\@undefined
+\else
+  \ifx\Umathchardef\@undefined
+  \else
+    \ifx\Umathaccent\@undefined
+    \else
+      \M@XeTeXLuaTeXtrue
+    \fi
+  \fi
+\fi
+\ifM@XeTeXLuaTeX
+  \endgroup
+\else
+  \M@XeTeXLuaTeXError\endgroup
+  \AtEndOfPackage{\typeout{Package mathfont failed to load\on@line}}
+  \expandafter\endinput% we should \endinput with a balanced conditional
+\fi
+\def\M@OptionDepreciated#1#2{\PackageError{mathfont}
+  {Option "#1" depreciated}
+  {Your option was ignored. Please\MessageBreak
+  use #2\MessageBreak
+  instead. For more information,\MessageBreak
+  see the mathfont documentation.}}
+\IfFileExists{atveryend.sty}
+  {\RequirePackage{atveryend}\let\M@SpecialHook\AtVeryVeryEnd}
+  {\let\M@SpecialHook\AtEndDocument}
+\DeclareOption{packages}{\M@OptionDepreciated{packages}
+  {\string\restoremathinternals}}
+\DeclareOption{operators}{\M@OptionDepreciated{operators}
+  {the bigops keyword with \string\mathfont}}
+\DeclareOption{no-operators}{\M@OptionDepreciated{no-operators}
+  {the bigops keyword with \string\mathfont}}
+\DeclareOption{easter-egg}{\ifM@special\M@specialfalse
+  \def\EasterEggUpdate{\show\E@sterEggUpdate}
+  \def\E@sterEggUpdate{Okay, opening your Easter egg}
+    \EasterEggUpdate
+  \def\E@sterEggUpdate{..}
+    \EasterEggUpdate
+    \EasterEggUpdate
+  \typeout{^^JHm, I think it flew out the^^J%
+    window. Check back here when^^J%
+    everything's done compiling^^J}
+  \def\E@sterEggUpdate{Uh oh}
+    \EasterEggUpdate
+  \def\E@sterEggUpdate{Still wrangling. Try back later}
+  \AtBeginDocument\EasterEggUpdate
+  \M@SpecialHook{%
+    \typeout{^^JHappy, happy day! Happy,^^J%
+    happy day! Clap your hands,^^J%
+    and be glad your hovercraft^^J%
+    isn't full of eels!^^J}
+    \def\E@sterEggUpdate{Got it}
+      \EasterEggUpdate}
+  \fi}% my easter egg :)
+\DeclareOption*{\M@font@loadedtrue\edef\M@font@load{\CurrentOption}}
+\ProcessOptions*
+\def\M@FontChangeInfo#1#2{\wlog{Package mathfont Info:
+  Changing #1 characters to #2!}}
+\def\M@CommandInitializeInfo#1{\wlog{Package mathfont Info: Initializing
+  \noexpand#1 font-change command on line \the\inputlineno.}}
+\def\M@NewFontCommandInfo#1#2#3#4{\wlog{Package mathfont Info: Creating
+  math alphabet command \noexpand#1 using^^J%
+  #2 font with series #3 and shape #4 on line \the\inputlineno.}}
+\def\M@SetInternalsInfo{\wlog{Package mathfont Info: Setting
+  \string\set@mathchar, \string\set@mathsymbol, \string\set@mathaccent.}}
+\def\M@RestoreInternalsInfo{\wlog{Package mathfont Info: Fixing
+  \string\set@mathchar, \string\set@mathsymbol, \string\set@mathaccent.}}
+\def\M@CharsSetWarning#1{\PackageWarning{mathfont}
+  {Font for #1 chars has already\MessageBreak
+  been set, so I'm ignoring this\MessageBreak
+  keyword}}
+\def\M@DoubleArgWarning#1#2{\PackageWarning{mathfont}
+  {I'm ignoring the multiple characters\MessageBreak
+  "#1" that are grouped together in\MessageBreak
+  the argument of your \expandafter\string#2\space command\MessageBreak}}
+\def\M@NestedArgWarning#1#2{\PackageWarning{mathfont}
+  {I'm ignoring the nested argument\MessageBreak
+  "#1" from your \expandafter\string#2\MessageBreak
+  command}}
+\def\M@ControlSequenceArgWarning#1#2{\PackageWarning{mathfont}
+  {I'm ignoring the unexpandable control\MessageBreak
+  sequence \expandafter\string#1\space that appears in the\MessageBreak
+  argument of your \expandafter\string#2\space command\MessageBreak}}
+\def\M@CharacterArgWarning#1#2{\PackageWarning{mathfont}
+  {I'm ignoring the "#1" in the\MessageBreak
+  argument of your \expandafter\string#2\MessageBreak
+  command because it isn't a\MessageBreak
+  letter or digit}}
+\def\M@DepreciatedWarning#1#2{\PackageWarning{mathfont}
+  {Your \string#1\space command is\MessageBreak
+  depreciated, and I replaced it with\MessageBreak
+  \string#2}}
+\def\M@NoMathError{\PackageError{mathfont}
+  {Package fontspec was loaded\MessageBreak
+  without the "no-math" option}
+  {This isn't really an error--it's fine to load\MessageBreak
+  fontspec without "no-math." However, strange\MessageBreak
+  things could happen, so beware of any sudden\MessageBreak
+  and unexpected font changes. To resolve this\MessageBreak
+  error message, load fontspec with the "no-\MessageBreak
+  math" option. If you haven't loaded fontspec\MessageBreak
+  manually, try loading mathfont earlier in your\MessageBreak
+  preamble.}}
+\def\M@InvalidOptionError#1{\PackageError{mathfont}
+  {Invalid option "#1"\MessageBreak
+  for \string\mathfont\on@line}
+  {Hm. Check that you spelled the\MessageBreak
+  option correctly. Otherwise, I'm\MessageBreak
+  not sure what's wrong. Is this\MessageBreak
+  option listed in the package\MessageBreak
+  documentation? In any event, I'm\MessageBreak
+  going to ignore this option.}}
+\def\M@InvalidSuboptionError#1{\PackageError{mathfont}
+  {Invalid suboption "#1"\MessageBreak
+  for \string\mathfont\on@line}
+  {Hm. Check that you spelled the\MessageBreak
+  suboption correctly. Otherwise, I'm\MessageBreak
+  not sure what's wrong. Is this\MessageBreak
+  suboption listed in the package\MessageBreak
+  documentation? In any event, I'm\MessageBreak
+  going to ignore this suboption.}}
+\def\M@MissingOptionError{\PackageError{mathfont}
+  {Missing option for\MessageBreak
+  \string\mathfont\on@line}
+  {It looks like you included a , or = in\MessageBreak
+  the optional argument of \string\mathfont\MessageBreak
+  but didn't put anything before it.}}
+\def\M@MissingSuboptionError{\PackageError{mathfont}
+  {Missing suboption for\MessageBreak
+  \string\mathfont\on@line}
+  {It looks like you included an = somewhere\MessageBreak
+  but didn't put the suboption after it. Either\MessageBreak
+  that or you typed == instead of = in the\MessageBreak
+  optional argument of \string\mathfont.}}
+\def\M@InternalsRestoredError{\PackageError{mathfont}
+  {Internal commands restored}
+  {This package slightly changes two LaTeX\MessageBreak
+  internal commands, and you really shouldn't\MessageBreak
+  be loading new math fonts without those\MessageBreak
+  adjustments. What happened here is that you\MessageBreak
+  used \string\mathfont\space in a situation where those\MessageBreak
+  two commands retain their original defini-\MessageBreak
+  tions. Presumably you used \string\mathfont\space after\MessageBreak
+  calling the \string\restoremathinternals\space command.\MessageBreak
+  I'm going to ignore this call to \string\mathfont.\MessageBreak
+  Try retypesetting this document with all\MessageBreak
+  \string\mathfont\space commands placed before you call\MessageBreak
+  \string\restoremathinternals.}}
+\def\M@MissingControlSequenceError#1#2{\PackageError{mathfont}
+  {Missing control sequence\MessageBreak
+  for\string#1\MessageBreak on input line \the\inputlineno}
+  {Your command was ignored. Right now the\MessageBreak
+  first argument of \string#1\space is "#2."\MessageBreak
+  Please use a control sequence instead.}}
+\def\M@DoubleArgError#1#2{\PackageError{mathfont}
+  {Multiple characters in\MessageBreak
+  first argument of \string#2\MessageBreak
+  on input line \the\inputlineno}
+  {Your command was ignored. Right now the\MessageBreak
+  first argument of \string#2\space is "#1,"\MessageBreak
+  which is multiple characters. Please use\MessageBreak
+  a single character instead.}}
+\def\M@HModeError#1{\PackageError{mathfont}
+  {Missing \$ inserted. The\MessageBreak
+  command \string#1\space must be used in\MessageBreak
+  math mode\on@line}
+  {I generated an error because\MessageBreak
+  you used \string#1\space outside of\MessageBreak
+  math mode. I've inserted a \string$\MessageBreak
+  just before your \string#1, so\MessageBreak
+  we should be all good now.}}
+\@ifpackageloaded{fontspec}
+  {\ifnum\csname g__fontspec_math_bool\endcsname=\@ne
+    \M@NoMathError
+  \fi}{\RequirePackage[no-math]{fontspec}}
+\expandafter\let\expandafter\@newfont
+  \csname fontspec_set_family:Nnn\endcsname
+\M@SetInternalsInfo
+\let\@@set@mathchar\set@mathchar
+\let\@@set@mathsymbol\set@mathsymbol
+\let\@@set@mathaccent\set@mathaccent
+\def\set@mathchar#1#2#3#4{%
+  \multiply\count\z@ by 16\relax
+  \advance\count\z@\count\tw@
+  \global\Umathcode`#2=\mathchar@type#3+#1+\count\z@\relax}
+\def\set@mathsymbol#1#2#3#4{%
+  \multiply\count\z@ by 16\relax
+  \advance\count\z@\count\tw@
+  \global\Umathchardef#2\mathchar@type#3+#1+\count\z@\relax}
+\def\set@mathaccent#1#2#3#4{%
+  \multiply\count\z@ by 16\relax
+  \advance\count\z@\count\tw@
+  \xdef#2{\Umathaccent\mathchar@type#3+#1+\the\count\z@\relax}}
+\newcount\M@count
+\newcount\M@return
+\M@count\z@
+\newtoks\M@toks
+\newif\if@upper
+\newif\if@lower
+\newif\if@diacritics
+\newif\if@greekupper
+\newif\if@greeklower
+\newif\if@agreekupper
+\newif\if@agreeklower
+\newif\if@cyrillicupper
+\newif\if@cyrilliclower
+\newif\if@hebrew
+\newif\if@digits
+\newif\if@operator
+\newif\if@symbols
+\newif\if@extsymbols
+\newif\if@delimiters
+\newif\if@arrows
+\newif\if@bigops
+\newif\if@extbigops
+\newif\if@bb
+\newif\if@cal
+\newif\if@frak
+\newif\if@bcal
+\newif\if@bfrak
+\newif\if@optionpresent
+\newif\if@suboptionpresent
+\newif\ifM@mathfont@firstoption
+\newif\ifM@anychars@changed
+\newif\ifM@arg@good
+\def\@uppershape{italic}% latin upper
+\def\@lowershape{italic}% latin lower
+\def\@diacriticsshape{roman}% diacritics
+\def\@greekuppershape{roman}% greek upper
+\def\@greeklowershape{italic}% greek lower
+\def\@agreekuppershape{roman}% ancient greek upper
+\def\@agreeklowershape{italic}% ancient greek lower
+\def\@cyrillicuppershape{roman}% cyrillic upper
+\def\@cyrilliclowershape{italic}% cyrillic lower
+\def\@hebrewshape{roman}% hebrew
+\def\@digitsshape{roman}% numerals
+\def\@operatorshape{roman}% operator font
+\def\@symbolsshape{roman}% basic symbols
+\def\@extsymbolsshape{roman}% extended symbols
+\def\@delimitersshape{roman}% delimiters
+\def\@arrowsshape{roman}% arrows
+\def\@bigopsshape{roman}% big operators
+\def\@extbigopsshape{roman}% extended big operators
+\def\@bbshape{roman}% blackboard bold
+\def\@calshape{roman}% caligraphic
+\def\@frakshape{roman}% fraktur
+\def\@bcalshape{roman}% bold caligraphic
+\def\@bfrakshape{roman}% bold fraktur
+\def\@defaultkeys{upper,lower,diacritics,greekupper,greeklower,%
+  digits,symbols,operator}
+\def\@normalkeys{upper,lower,diacritics,greekupper,greeklower,agreekupper,%
+  agreeklower,cyrillicupper,cyrilliclower,hebrew,digits,operator,symbols,%
+  extsymbols,delimiters,arrows,bigops,extbigops}
+\def\@alphanumkeys{bb,cal,frak,bcal,bfrak}
+\def\M@check@option@valid#1{%
+  \def\@temperror{\M@InvalidOptionError{#1}}
+  \@for\@j:=\@normalkeys\do{%
+    \ifx\@j#1
+      \let\@temperror\relax
+      \@optionpresenttrue% set switch to true if option is valid
+      \advance\M@return\@ne
+    \fi}
+  \@for\@j:=\@alphanumkeys\do{%
+    \ifx\@j#1
+      \let\@temperror\relax
+      \expandafter\M@CommandInitializeInfo\csname math\@j\endcsname
+      \csname define@\@j\endcsname% initialize
+      \@optionpresenttrue% set switch to true if option is valid
+      \advance\M@return\@ne
+    \fi}
+  \@temperror}
+\def\M@check@suboption@valid#1{%
+  \def\@temperror{\M@InvalidSuboptionError{#1}}
+  \@for\@j:=roman,italic\do{%
+    \ifx\@j#1
+      \let\@temperror\relax
+      \@suboptionpresenttrue% set switch to true if suboption is valid
+      \advance\M@return\@ne
+    \fi}
+  \@temperror}
+\def\M@strip@equals#1={#1}
+\def\M@parse@option#1=#2\@nil{%
+  \@optionpresentfalse% set switch to false by default
+  \@suboptionpresentfalse% set switch to false by default
+  \def\@tempa{#1}
+  \def\@tempb{#2}
+  \ifx\@tempa\@empty
+    \M@MissingOptionError
+  \else
+    \M@check@option@valid\@tempa
+    \def\@tempc{=}
+    \ifx\@tempb\@tempc
+      \M@MissingSuboptionError
+    \else
+      \ifx\@tempb\@empty
+      \else
+        \edef\@tempb{\expandafter\M@strip@equals\@tempb}
+        \M@check@suboption@valid\@tempb
+      \fi
+    \fi
+  \fi}
+\def\M@eat@spaces#1{\expandafter\zap@space#1 \@empty}
+\def\M@check@arglength#1#2\@nil#3#4{%
+  \ifx\@nnil#2\@nnil
+  \else
+    #3{#1#2}{#4}%
+    \M@arg@goodfalse
+  \fi}
+\def\mathfont{\@ifnextchar[% next line is the two possible branches
+  {\bgroup\catcode`\ =9\relax\m@thf@nt}{\@mathfont[\@defaultkeys]}}
+\def\m@thf@nt[#1]{\egroup\@mathfont[#1]}
+\def\@mathfont[#1]#2{%
+  \ifx\set@mathchar\@@set@mathchar
+    \M@InternalsRestoredError
+  \else
+    \M@return\thr@@
+    \M@toks{}
+    \M@mathfont@firstoptiontrue
+    \wlog{Package mathfont Info: Loading font #2 with package fontspec.}
+    \expandafter\@newfont\csname M@font\the\M@count\endcsname{}{#2}
+    \edef\@tempa{#1}
+    \edef\@tempa{\M@eat@spaces\@tempa}
+    \@for\@i:=\@tempa\do{\expandafter\M@parse@option\@i=\@nil
+      \if@optionpresent
+        \expandafter\ifx% next line is two cs to be compared
+              \csname if@\@tempa\expandafter\endcsname\csname iftrue\endcsname
+          \M@CharsSetWarning{\@tempa}
+        \else
+          \ifM@mathfont@firstoption
+            \M@mathfont@firstoptionfalse
+          \else
+            \ifnum\M@return>5\relax
+              \expandafter\M@toks\expandafter{\the\M@toks,^^J}
+              \M@return\z@
+            \else
+              \expandafter\M@toks\expandafter{\the\M@toks, }
+            \fi
+          \fi
+          \edef\@tempc{\the\M@toks\@tempa}
+          \expandafter\M@toks\expandafter{\@tempc}
+          \if@suboptionpresent
+            \expandafter\edef\csname @\@tempa shape\endcsname{\@tempb}
+            \edef\@tempc{\the\M@toks\space(\@tempb)}
+            \expandafter\M@toks\expandafter{\@tempc}
+          \fi
+          \def\@tempb{roman}
+          \expandafter\ifx\csname @\@tempa shape\endcsname\@tempb
+            \@ifundefined{symMroman\the\M@count}
+              {\DeclareSymbolFont{Mroman\the\M@count}{TU}
+                {\csname M@font\the\M@count\endcsname}{m}{n}}{}
+          \fi
+          \def\@tempb{italic}
+          \expandafter\ifx\csname @\@tempa shape\endcsname\@tempb
+            \@ifundefined{symMitalic\the\M@count}
+              {\DeclareSymbolFont{Mitalic\the\M@count}{TU}
+                {\csname M@font\the\M@count\endcsname}{m}{it}}{}
+          \fi
+          \expandafter\edef\csname M@\@tempa @fontinfo\endcsname{#2}
+          \M@anychars@changedtrue
+          \M@FontChangeInfo{\@tempa}{#2}
+          \csname M@\@tempa @set\endcsname% set default font
+          \csname @\@tempa true\endcsname% set switch to true
+        \fi
+      \fi}
+    \advance\M@count\@ne
+    \edef\@tempa{\the\M@toks}
+    \ifx\@tempa\@empty
+      \wlog{The \string\mathfont\space command on line \the\inputlineno\space
+        did not change the font for any characters!}
+    \else
+      \typeout{:: mathfont :: Math font set to #2\space
+        on line \the\inputlineno.}
+      \wlog{Character classes changed: \the\M@toks.^^J}
+    \fi
+  \fi}
+\@onlypreamble\mathfont
+\@onlypreamble\m@thf@nt
+\@onlypreamble\@mathfont
+\def\setfont#1{\setmainfont[Ligatures=TeX]{#1}\mathfont{#1}}
+\@onlypreamble\setfont
+\def\M@check@mode#1{%
+  \let\@tempa#1%
+  \ifmmode
+    \expandafter\@tempa
+  \else
+    \bgroup
+      \escapechar\m@ne
+      \expandafter
+    \egroup
+    \expandafter\M@HModeError\csname\expandafter\@gobble\string#1\endcsname
+    \leavevmode\expandafter$\expandafter\@tempa
+  \fi}
+\def\M@process@tokens#1#2{%
+  \edef\@tempa{#1}%
+  \expandafter\@tfor\expandafter\@k\expandafter:\expandafter=\@tempa\do{%
+  \expandafter\M@check@token\expandafter{\@k}{#2}%
+  \ifM@arg@good
+    \csname M@#2@\@k\endcsname
+  \fi}}
+\def\M@check@token#1#2{%
+  \M@arg@goodtrue
+  \M@check@arglength#1\@nil\M@DoubleArgWarning{\csname math#2\endcsname}%
+  \ifM@arg@good% good
+    \expandafter\@gobble\expandafter{\ifcat\bgroup#1% bad
+      \M@NestedArgWarning{#1}{\csname math#2\endcsname}%
+      \M@arg@goodfalse
+    \else}%
+      \ifcat\relax\noexpand#1% bad
+      \M@ControlSequenceArgWarning{#1}{\csname math#2\endcsname}%
+      \M@arg@goodfalse
+      \else
+        \ifcat a#1% good
+        \else
+          \if 0#1% good
+          \else
+            \if 1#1% good
+            \else
+              \if 2#1% good
+              \else
+                \if 3#1% good
+                \else
+                  \if 4#1% good
+                  \else
+                    \if 5#1% good
+                    \else
+                      \if 6#1% good
+                      \else
+                        \if 7#1% good
+                        \else
+                          \if 8#1% good
+                          \else
+                            \if 9#1% good
+                            \else
+                              \M@CharacterArgWarning
+                                {#1}{\csname math#2\endcsname}%
+                              \M@arg@goodfalse
+                            \fi
+                          \fi
+                        \fi
+                      \fi
+                    \fi
+                  \fi
+                \fi
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi}
+\def\define@bb{%
+  \def\mathbb{\M@check@mode\@mathbb}%
+  \def\@mathbb##1{\M@process@tokens{##1}{bb}}}
+\def\define@cal{%
+  \def\mathcal{\M@check@mode\@mathcal}%
+  \def\@mathcal##1{\M@process@tokens{##1}{cal}}}
+\def\define@frak{%
+  \def\mathfrak{\M@check@mode\@mathfrak}%
+  \def\@mathfrak##1{\M@process@tokens{##1}{frak}}}
+\def\define@bcal{%
+  \def\mathbcal{\M@check@mode\@mathbcal}%
+  \def\@mathbcal##1{\M@process@tokens{##1}{bcal}}}
+\def\define@bfrak{%
+  \def\mathbfrak{\M@check@mode\@mathbfrak}%
+  \def\@mathbfrak##1{\M@process@tokens{##1}{bfrak}}}
+\def\M@check@csarg#1#2#3{%
+  \M@arg@goodtrue
+  \M@check@arglength#2\@nil\M@DoubleArgError{#1}
+  \ifM@arg@good% good
+    \ifcat\relax\noexpand#2% good
+    \else
+      \M@MissingControlSequenceError{#1}{#2}
+      \M@arg@goodfalse
+    \fi
+  \fi
+  \ifM@arg@good
+    \def\@tempa{#2}
+    \wlog{Package mathfont Info: Loading font #3 with package fontspec.}
+    \@newfont\@tempb{}{#3}
+    \expandafter\@newmathfontcommand
+  \else
+    \expandafter\@gobbletwo
+  \fi}
+\@onlypreamble\M@check@csarg
+\def\@newmathfontcommand#1#2{%
+  \expandafter\M@NewFontCommandInfo\expandafter
+    {\@tempa}{\@tempb}{#1}{#2}
+  \expandafter\DeclareMathAlphabet\expandafter
+    {\@tempa}{TU}{\@tempb}{#1}{#2}}
+\def\newmathfontcommand{\M@check@csarg\newmathfontcommand}
+\@onlypreamble\@newmathfontcommand
+\@onlypreamble\newmathfontcommand
+\def\newmathrm#1#2{\M@check@csarg\newmathrm{#1}{#2}
+  {\mddefault}{\updefault}}
+\def\newmathit#1#2{\M@check@csarg\newmathit{#1}{#2}
+  {\mddefault}{\itdefault}}
+\def\newmathbf#1#2{\M@check@csarg\newmathbf{#1}{#2}
+  {\bfdefault}{\updefault}}
+\def\newmathbfit#1#2{\M@check@csarg\newmathbfit{#1}{#2}
+  {\bfdefault}{\itdefault}}
+\@onlypreamble\newmathrm
+\@onlypreamble\newmathit
+\@onlypreamble\newmathbf
+\@onlypreamble\newmathbfit
+\def\newmathbold{%
+  \M@DepreciatedWarning\newmathbold\newmathbf
+  \newmathbf}
+\def\newmathboldit{%
+  \M@DepreciatedWarning\newmathboldit\newmathbfit
+  \newmathbfit}
+\def\restoremathinternals{%
+  \ifx\set@mathchar\@@set@mathchar
+  \else
+    \M@RestoreInternalsInfo
+  \fi
+  \let\set@mathchar\@@set@mathchar
+  \let\set@mathsymbol\@@set@mathsymbol
+  \let\set@mathaccent\@@set@mathaccent}
+\def\keyword@info@begindocument#1{%
+  \expandafter\ifx% next line is two cs to be compared
+        \csname if@#1\expandafter\endcsname\csname iftrue\endcsname
+    \wlog{Keyword #1: Set to \csname M@#1@fontinfo\endcsname\space with
+      \csname @#1shape\endcsname\space shape.}
+  \else
+    \wlog{Keyword #1: No change.}
+  \fi}
+\AtBeginDocument{%
+  \ifM@anychars@changed
+    \edef\@tempa{\@normalkeys,\@alphanumkeys}
+    \wlog{^^J:: mathfont :: List of fonts changed by mathfont:}
+    \@for\@i:=\@tempa\do{%
+      \expandafter\keyword@info@begindocument\expandafter{\@i}}
+    \wlog{}
+  \else
+    \wlog{^^J:: mathfont :: No fonts were changed by mathfont.^^J}
+  \fi}
+\tracinglostchars=1
+\ifx\XeTeXrevision\@undefined
+\else
+  \ifM@font@loaded
+    \AtEndOfPackage{%
+    \PackageWarningNoLine{mathfont}
+    {XeTeX detected. It looks like you\MessageBreak
+    specified a font when you loaded\MessageBreak
+    mathfont. If you run into problems\MessageBreak
+    with a font whose name is multiple\MessageBreak
+    words, try compiling with LuaLaTeX\MessageBreak
+    instead or call \string\setfont\space
+    or \string\mathfont\MessageBreak manually}}
+  \fi
+\fi
+\ifM@font@loaded
+  \AtEndOfPackage{%
+  \setfont\M@font@load
+  \newmathrm\mathrm\M@font@load
+  \newmathit\mathit\M@font@load
+  \newmathbf\mathbf\M@font@load
+  \newmathbfit\mathbfit\M@font@load}
+\fi
+\AtBeginDocument{%
+  \if@bb
+    \@ifpackageloaded{amsmath}{\PackageWarningNoLine{mathfont}
+    {Package amsmath detected. Some warning\MessageBreak
+    messages for \string\mathbb\space may be duplicated\MessageBreak
+    inside the align environment}}{}
+  \fi
+  \if@cal
+    \@ifpackageloaded{amsmath}{\PackageWarningNoLine{mathfont}
+    {Package amsmath detected. Some warning\MessageBreak
+    messages for \string\mathcal\space may be duplicated\MessageBreak
+    inside the align environment}}{}
+  \fi
+  \if@frak
+    \@ifpackageloaded{amsmath}{\PackageWarningNoLine{mathfont}
+    {Package amsmath detected. Some warning\MessageBreak
+    messages for \string\mathfrak\space may be duplicated\MessageBreak
+    inside the align environment}}{}
+  \fi
+  \if@bcal
+    \@ifpackageloaded{amsmath}{\PackageWarningNoLine{mathfont}
+    {Package amsmath detected. Some warning\MessageBreak
+    messages for \string\mathbcal\space may be duplicated\MessageBreak
+    inside the align environment}}{}
+  \fi
+  \if@bfrak
+    \@ifpackageloaded{amsmath}{\PackageWarningNoLine{mathfont}
+    {Package amsmath detected. Some warning\MessageBreak
+    messages for \string\mathbfrak\space may be duplicated\MessageBreak
+    inside the align environment}}{}
+  \fi}
+\@onlypreamble\M@upper@set
+\@onlypreamble\M@lower@set
+\@onlypreamble\M@diacritics@set
+\@onlypreamble\M@greekupper@set
+\@onlypreamble\M@greeklower@set
+\@onlypreamble\M@agreekupper@set
+\@onlypreamble\M@agreeklower@set
+\@onlypreamble\M@cyrillicupper@set
+\@onlypreamble\M@cyrilliclower@set
+\@onlypreamble\M@hebrew@set
+\@onlypreamble\M@digits@set
+\@onlypreamble\M@operator@set
+\@onlypreamble\M@symbols@set
+\@onlypreamble\M@extsymbols@set
+\@onlypreamble\M@delimiters@set
+\@onlypreamble\M@arrows@set
+\@onlypreamble\M@bigops@set
+\@onlypreamble\M@extbigops@set
+\@onlypreamble\M@bb@set
+\@onlypreamble\M@cal@set
+\@onlypreamble\M@frak@set
+\@onlypreamble\M@bcal@set
+\@onlypreamble\M@bfrak@set
+\def\M@upper@set{%
+  \edef\M@upper{M\@uppershape\the\M@count}
+  \DeclareMathSymbol{A}{\mathalpha}{\M@upper}{`A}
+  \DeclareMathSymbol{B}{\mathalpha}{\M@upper}{`B}
+  \DeclareMathSymbol{C}{\mathalpha}{\M@upper}{`C}
+  \DeclareMathSymbol{D}{\mathalpha}{\M@upper}{`D}
+  \DeclareMathSymbol{E}{\mathalpha}{\M@upper}{`E}
+  \DeclareMathSymbol{F}{\mathalpha}{\M@upper}{`F}
+  \DeclareMathSymbol{G}{\mathalpha}{\M@upper}{`G}
+  \DeclareMathSymbol{H}{\mathalpha}{\M@upper}{`H}
+  \DeclareMathSymbol{I}{\mathalpha}{\M@upper}{`I}
+  \DeclareMathSymbol{J}{\mathalpha}{\M@upper}{`J}
+  \DeclareMathSymbol{K}{\mathalpha}{\M@upper}{`K}
+  \DeclareMathSymbol{L}{\mathalpha}{\M@upper}{`L}
+  \DeclareMathSymbol{M}{\mathalpha}{\M@upper}{`M}
+  \DeclareMathSymbol{N}{\mathalpha}{\M@upper}{`N}
+  \DeclareMathSymbol{O}{\mathalpha}{\M@upper}{`O}
+  \DeclareMathSymbol{P}{\mathalpha}{\M@upper}{`P}
+  \DeclareMathSymbol{Q}{\mathalpha}{\M@upper}{`Q}
+  \DeclareMathSymbol{R}{\mathalpha}{\M@upper}{`R}
+  \DeclareMathSymbol{S}{\mathalpha}{\M@upper}{`S}
+  \DeclareMathSymbol{T}{\mathalpha}{\M@upper}{`T}
+  \DeclareMathSymbol{U}{\mathalpha}{\M@upper}{`U}
+  \DeclareMathSymbol{V}{\mathalpha}{\M@upper}{`V}
+  \DeclareMathSymbol{W}{\mathalpha}{\M@upper}{`W}
+  \DeclareMathSymbol{X}{\mathalpha}{\M@upper}{`X}
+  \DeclareMathSymbol{Y}{\mathalpha}{\M@upper}{`Y}
+  \DeclareMathSymbol{Z}{\mathalpha}{\M@upper}{`Z}}
+\def\M@lower@set{%
+  \edef\M@lower{M\@lowershape\the\M@count}
+  \DeclareMathSymbol{a}{\mathalpha}{\M@lower}{`a}
+  \DeclareMathSymbol{b}{\mathalpha}{\M@lower}{`b}
+  \DeclareMathSymbol{c}{\mathalpha}{\M@lower}{`c}
+  \DeclareMathSymbol{d}{\mathalpha}{\M@lower}{`d}
+  \DeclareMathSymbol{e}{\mathalpha}{\M@lower}{`e}
+  \DeclareMathSymbol{f}{\mathalpha}{\M@lower}{`f}
+  \DeclareMathSymbol{g}{\mathalpha}{\M@lower}{`g}
+  \DeclareMathSymbol{h}{\mathalpha}{\M@lower}{`h}
+  \DeclareMathSymbol{i}{\mathalpha}{\M@lower}{`i}
+  \DeclareMathSymbol{\imath}{\mathalpha}{\M@lower}{"131}
+  \DeclareMathSymbol{j}{\mathalpha}{\M@lower}{`j}
+  \DeclareMathSymbol{\jmath}{\mathalpha}{\M@lower}{"237}
+  \DeclareMathSymbol{k}{\mathalpha}{\M@lower}{`k}
+  \DeclareMathSymbol{l}{\mathalpha}{\M@lower}{`l}
+  \DeclareMathSymbol{m}{\mathalpha}{\M@lower}{`m}
+  \DeclareMathSymbol{n}{\mathalpha}{\M@lower}{`n}
+  \DeclareMathSymbol{o}{\mathalpha}{\M@lower}{`o}
+  \DeclareMathSymbol{p}{\mathalpha}{\M@lower}{`p}
+  \DeclareMathSymbol{q}{\mathalpha}{\M@lower}{`q}
+  \DeclareMathSymbol{r}{\mathalpha}{\M@lower}{`r}
+  \DeclareMathSymbol{s}{\mathalpha}{\M@lower}{`s}
+  \DeclareMathSymbol{t}{\mathalpha}{\M@lower}{`t}
+  \DeclareMathSymbol{u}{\mathalpha}{\M@lower}{`u}
+  \DeclareMathSymbol{v}{\mathalpha}{\M@lower}{`v}
+  \DeclareMathSymbol{w}{\mathalpha}{\M@lower}{`w}
+  \DeclareMathSymbol{x}{\mathalpha}{\M@lower}{`x}
+  \DeclareMathSymbol{y}{\mathalpha}{\M@lower}{`y}
+  \DeclareMathSymbol{z}{\mathalpha}{\M@lower}{`z}}
+\def\M@diacritics@set{%
+  \edef\M@diacritics{M\@diacriticsshape\the\M@count}
+  \DeclareMathAccent{\acute}{\mathalpha}{\M@diacritics}{"B4}
+  \DeclareMathAccent{\aacute}{\mathalpha}{\M@diacritics}{"2DD}
+  \DeclareMathAccent{\dot}{\mathalpha}{\M@diacritics}{"2D9}
+  \DeclareMathAccent{\ddot}{\mathalpha}{\M@diacritics}{"A8}
+  \DeclareMathAccent{\grave}{\mathalpha}{\M@diacritics}{"60}
+  \DeclareMathAccent{\breve}{\mathalpha}{\M@diacritics}{"2D8}
+  \DeclareMathAccent{\hat}{\mathalpha}{\M@diacritics}{"2C6}
+  \DeclareMathAccent{\check}{\mathalpha}{\M@diacritics}{"2C7}
+  \DeclareMathAccent{\bar}{\mathalpha}{\M@diacritics}{"AF}
+  \DeclareMathAccent{\mathring}{\mathalpha}{\M@diacritics}{"2DA}
+  \DeclareMathAccent{\tilde}{\mathalpha}{\M@diacritics}{"2DC}}
+\def\M@greekupper@set{%
+  \edef\M@greekupper{M\@greekuppershape\the\M@count}
+  \DeclareMathSymbol{\Alpha}{\mathalpha}{\M@greekupper}{"391}
+  \DeclareMathSymbol{\Beta}{\mathalpha}{\M@greekupper}{"392}
+  \DeclareMathSymbol{\Gamma}{\mathalpha}{\M@greekupper}{"393}
+  \DeclareMathSymbol{\Delta}{\mathalpha}{\M@greekupper}{"394}
+  \DeclareMathSymbol{\Epsilon}{\mathalpha}{\M@greekupper}{"395}
+  \DeclareMathSymbol{\Zeta}{\mathalpha}{\M@greekupper}{"396}
+  \DeclareMathSymbol{\Eta}{\mathalpha}{\M@greekupper}{"397}
+  \DeclareMathSymbol{\Theta}{\mathalpha}{\M@greekupper}{"398}
+  \DeclareMathSymbol{\Iota}{\mathalpha}{\M@greekupper}{"399}
+  \DeclareMathSymbol{\Kappa}{\mathalpha}{\M@greekupper}{"39A}
+  \DeclareMathSymbol{\Lambda}{\mathalpha}{\M@greekupper}{"39B}
+  \DeclareMathSymbol{\Mu}{\mathalpha}{\M@greekupper}{"39C}
+  \DeclareMathSymbol{\Nu}{\mathalpha}{\M@greekupper}{"39D}
+  \DeclareMathSymbol{\Xi}{\mathalpha}{\M@greekupper}{"39E}
+  \DeclareMathSymbol{\Omicron}{\mathalpha}{\M@greekupper}{"39F}
+  \DeclareMathSymbol{\Pi}{\mathalpha}{\M@greekupper}{"3A0}
+  \DeclareMathSymbol{\Rho}{\mathalpha}{\M@greekupper}{"3A1}
+  \DeclareMathSymbol{\Sigma}{\mathalpha}{\M@greekupper}{"3A3}
+  \DeclareMathSymbol{\Tau}{\mathalpha}{\M@greekupper}{"3A4}
+  \DeclareMathSymbol{\Upsilon}{\mathalpha}{\M@greekupper}{"3A5}
+  \DeclareMathSymbol{\Phi}{\mathalpha}{\M@greekupper}{"3A6}
+  \DeclareMathSymbol{\Chi}{\mathalpha}{\M@greekupper}{"3A7}
+  \DeclareMathSymbol{\Psi}{\mathalpha}{\M@greekupper}{"3A8}
+  \DeclareMathSymbol{\Omega}{\mathalpha}{\M@greekupper}{"3A9}
+  \DeclareMathSymbol{\varTheta}{\mathalpha}{\M@greekupper}{"3F4}}
+\def\M@greeklower@set{%
+  \edef\M@greeklower{M\@greeklowershape\the\M@count}
+  \DeclareMathSymbol{\alpha}{\mathalpha}{\M@greeklower}{"3B1}
+  \DeclareMathSymbol{\beta}{\mathalpha}{\M@greeklower}{"3B2}
+  \DeclareMathSymbol{\gamma}{\mathalpha}{\M@greeklower}{"3B3}
+  \DeclareMathSymbol{\delta}{\mathalpha}{\M@greeklower}{"3B4}
+  \DeclareMathSymbol{\epsilon}{\mathalpha}{\M@greeklower}{"3F5}
+  \DeclareMathSymbol{\zeta}{\mathalpha}{\M@greeklower}{"3B6}
+  \DeclareMathSymbol{\eta}{\mathalpha}{\M@greeklower}{"3B7}
+  \DeclareMathSymbol{\theta}{\mathalpha}{\M@greeklower}{"3B8}
+  \DeclareMathSymbol{\iota}{\mathalpha}{\M@greeklower}{"3B9}
+  \DeclareMathSymbol{\kappa}{\mathalpha}{\M@greeklower}{"3BA}
+  \DeclareMathSymbol{\lambda}{\mathalpha}{\M@greeklower}{"3BB}
+  \DeclareMathSymbol{\mu}{\mathalpha}{\M@greeklower}{"3BC}
+  \DeclareMathSymbol{\nu}{\mathalpha}{\M@greeklower}{"3BD}
+  \DeclareMathSymbol{\xi}{\mathalpha}{\M@greeklower}{"3BE}
+  \DeclareMathSymbol{\omicron}{\mathalpha}{\M@greeklower}{"3BF}
+  \DeclareMathSymbol{\pi}{\mathalpha}{\M@greeklower}{"3C0}
+  \DeclareMathSymbol{\rho}{\mathalpha}{\M@greeklower}{"3C1}
+  \DeclareMathSymbol{\sigma}{\mathalpha}{\M@greeklower}{"3C3}
+  \DeclareMathSymbol{\tau}{\mathalpha}{\M@greeklower}{"3C4}
+  \DeclareMathSymbol{\upsilon}{\mathalpha}{\M@greeklower}{"3C5}
+  \DeclareMathSymbol{\phi}{\mathalpha}{\M@greeklower}{"3D5}
+  \DeclareMathSymbol{\chi}{\mathalpha}{\M@greeklower}{"3C7}
+  \DeclareMathSymbol{\psi}{\mathalpha}{\M@greeklower}{"3C8}
+  \DeclareMathSymbol{\omega}{\mathalpha}{\M@greeklower}{"3C9}
+  \DeclareMathSymbol{\varbeta}{\mathalpha}{\M@greeklower}{"3D0}
+  \DeclareMathSymbol{\varepsilon}{\mathalpha}{\M@greeklower}{"3B5}
+  \DeclareMathSymbol{\vartheta}{\mathalpha}{\M@greeklower}{"3D1}
+  \DeclareMathSymbol{\varrho}{\mathalpha}{\M@greeklower}{"3F1}
+  \DeclareMathSymbol{\varsigma}{\mathalpha}{\M@greeklower}{"3C2}
+  \DeclareMathSymbol{\varphi}{\mathalpha}{\M@greeklower}{"3C6}}
+\def\M@agreekupper@set{%
+  \edef\M@agreekupper{M\@agreekuppershape\the\M@count}
+  \DeclareMathSymbol{\Heta}{\mathalpha}{\M@agreekupper}{"370}
+  \DeclareMathSymbol{\Sampi}{\mathalpha}{\M@agreekupper}{"3E0}
+  \DeclareMathSymbol{\Digamma}{\mathalpha}{\M@agreekupper}{"3DC}
+  \DeclareMathSymbol{\Koppa}{\mathalpha}{\M@agreekupper}{"3D8}
+  \DeclareMathSymbol{\Stigma}{\mathalpha}{\M@agreekupper}{"3DA}
+  \DeclareMathSymbol{\Sho}{\mathalpha}{\M@agreekupper}{"3F7}
+  \DeclareMathSymbol{\San}{\mathalpha}{\M@agreekupper}{"3FA}
+  \DeclareMathSymbol{\varSampi}{\mathalpha}{\M@agreekupper}{"372}
+  \DeclareMathSymbol{\varDigamma}{\mathalpha}{\M@agreekupper}{"376}
+  \DeclareMathSymbol{\varKoppa}{\mathalpha}{\M@agreekupper}{"3DE}}
+\def\M@agreeklower@set{%
+  \edef\M@agreeklower{M\@agreeklowershape\the\M@count}
+  \DeclareMathSymbol{\heta}{\mathalpha}{\M@agreeklower}{"371}
+  \DeclareMathSymbol{\sampi}{\mathalpha}{\M@agreeklower}{"3E1}
+  \DeclareMathSymbol{\digamma}{\mathalpha}{\M@agreeklower}{"3DD}
+  \DeclareMathSymbol{\koppa}{\mathalpha}{\M@agreeklower}{"3D9}
+  \DeclareMathSymbol{\stigma}{\mathalpha}{\M@agreeklower}{"3DB}
+  \DeclareMathSymbol{\sho}{\mathalpha}{\M@agreeklower}{"3F8}
+  \DeclareMathSymbol{\san}{\mathalpha}{\M@agreeklower}{"3FB}
+  \DeclareMathSymbol{\varsampi}{\mathalpha}{\M@agreeklower}{"373}
+  \DeclareMathSymbol{\vardigamma}{\mathalpha}{\M@agreeklower}{"377}
+  \DeclareMathSymbol{\varkoppa}{\mathalpha}{\M@agreeklower}{"3DF}}
+\def\M@cyrillicupper@set{%
+  \edef\M@cyrillicupper{M\@cyrillicuppershape\the\M@count}
+  \DeclareMathSymbol{\cyrA}{\mathalpha}{\M@cyrillicupper}{"410}
+  \DeclareMathSymbol{\cyrBe}{\mathalpha}{\M@cyrillicupper}{"411}
+  \DeclareMathSymbol{\cyrVe}{\mathalpha}{\M@cyrillicupper}{"412}
+  \DeclareMathSymbol{\cyrGhe}{\mathalpha}{\M@cyrillicupper}{"413}
+  \DeclareMathSymbol{\cyrDe}{\mathalpha}{\M@cyrillicupper}{"414}
+  \DeclareMathSymbol{\cyrIe}{\mathalpha}{\M@cyrillicupper}{"415}
+  \DeclareMathSymbol{\cyrZhe}{\mathalpha}{\M@cyrillicupper}{"416}
+  \DeclareMathSymbol{\cyrZe}{\mathalpha}{\M@cyrillicupper}{"417}
+  \DeclareMathSymbol{\cyrI}{\mathalpha}{\M@cyrillicupper}{"418}
+  \DeclareMathSymbol{\cyrKa}{\mathalpha}{\M@cyrillicupper}{"41A}
+  \DeclareMathSymbol{\cyrEl}{\mathalpha}{\M@cyrillicupper}{"41B}
+  \DeclareMathSymbol{\cyrEm}{\mathalpha}{\M@cyrillicupper}{"41C}
+  \DeclareMathSymbol{\cyrEn}{\mathalpha}{\M@cyrillicupper}{"41D}
+  \DeclareMathSymbol{\cyrO}{\mathalpha}{\M@cyrillicupper}{"41E}
+  \DeclareMathSymbol{\cyrPe}{\mathalpha}{\M@cyrillicupper}{"41F}
+  \DeclareMathSymbol{\cyrEr}{\mathalpha}{\M@cyrillicupper}{"420}
+  \DeclareMathSymbol{\cyrEs}{\mathalpha}{\M@cyrillicupper}{"421}
+  \DeclareMathSymbol{\cyrTe}{\mathalpha}{\M@cyrillicupper}{"422}
+  \DeclareMathSymbol{\cyrU}{\mathalpha}{\M@cyrillicupper}{"423}
+  \DeclareMathSymbol{\cyrEf}{\mathalpha}{\M@cyrillicupper}{"424}
+  \DeclareMathSymbol{\cyrHa}{\mathalpha}{\M@cyrillicupper}{"425}
+  \DeclareMathSymbol{\cyrTse}{\mathalpha}{\M@cyrillicupper}{"426}
+  \DeclareMathSymbol{\cyrChe}{\mathalpha}{\M@cyrillicupper}{"427}
+  \DeclareMathSymbol{\cyrSha}{\mathalpha}{\M@cyrillicupper}{"428}
+  \DeclareMathSymbol{\cyrShcha}{\mathalpha}{\M@cyrillicupper}{"429}
+  \DeclareMathSymbol{\cyrHard}{\mathalpha}{\M@cyrillicupper}{"42A}
+  \DeclareMathSymbol{\cyrYeru}{\mathalpha}{\M@cyrillicupper}{"42B}
+  \DeclareMathSymbol{\cyrSoft}{\mathalpha}{\M@cyrillicupper}{"42C}
+  \DeclareMathSymbol{\cyrE}{\mathalpha}{\M@cyrillicupper}{"42D}
+  \DeclareMathSymbol{\cyrYu}{\mathalpha}{\M@cyrillicupper}{"42E}
+  \DeclareMathSymbol{\cyrYa}{\mathalpha}{\M@cyrillicupper}{"42F}
+  \DeclareMathSymbol{\cyrvarI}{\mathalpha}{\M@cyrillicupper}{"419}}
+\def\M@cyrilliclower@set{%
+  \edef\M@cyrilliclower{M\@cyrilliclowershape\the\M@count}
+  \DeclareMathSymbol{\cyra}{\mathalpha}{\M@cyrilliclower}{"430}
+  \DeclareMathSymbol{\cyrbe}{\mathalpha}{\M@cyrilliclower}{"431}
+  \DeclareMathSymbol{\cyrve}{\mathalpha}{\M@cyrilliclower}{"432}
+  \DeclareMathSymbol{\cyrghe}{\mathalpha}{\M@cyrilliclower}{"433}
+  \DeclareMathSymbol{\cyrde}{\mathalpha}{\M@cyrilliclower}{"434}
+  \DeclareMathSymbol{\cyrie}{\mathalpha}{\M@cyrilliclower}{"435}
+  \DeclareMathSymbol{\cyrzhe}{\mathalpha}{\M@cyrilliclower}{"436}
+  \DeclareMathSymbol{\cyrze}{\mathalpha}{\M@cyrilliclower}{"437}
+  \DeclareMathSymbol{\cyri}{\mathalpha}{\M@cyrilliclower}{"438}
+  \DeclareMathSymbol{\cyrka}{\mathalpha}{\M@cyrilliclower}{"43A}
+  \DeclareMathSymbol{\cyrel}{\mathalpha}{\M@cyrilliclower}{"43B}
+  \DeclareMathSymbol{\cyrem}{\mathalpha}{\M@cyrilliclower}{"43C}
+  \DeclareMathSymbol{\cyren}{\mathalpha}{\M@cyrilliclower}{"43D}
+  \DeclareMathSymbol{\cyro}{\mathalpha}{\M@cyrilliclower}{"43E}
+  \DeclareMathSymbol{\cyrpe}{\mathalpha}{\M@cyrilliclower}{"43F}
+  \DeclareMathSymbol{\cyrer}{\mathalpha}{\M@cyrilliclower}{"440}
+  \DeclareMathSymbol{\cyres}{\mathalpha}{\M@cyrilliclower}{"441}
+  \DeclareMathSymbol{\cyrte}{\mathalpha}{\M@cyrilliclower}{"442}
+  \DeclareMathSymbol{\cyru}{\mathalpha}{\M@cyrilliclower}{"443}
+  \DeclareMathSymbol{\cyref}{\mathalpha}{\M@cyrilliclower}{"444}
+  \DeclareMathSymbol{\cyrha}{\mathalpha}{\M@cyrilliclower}{"445}
+  \DeclareMathSymbol{\cyrtse}{\mathalpha}{\M@cyrilliclower}{"446}
+  \DeclareMathSymbol{\cyrche}{\mathalpha}{\M@cyrilliclower}{"447}
+  \DeclareMathSymbol{\cyrsha}{\mathalpha}{\M@cyrilliclower}{"448}
+  \DeclareMathSymbol{\cyrshcha}{\mathalpha}{\M@cyrilliclower}{"449}
+  \DeclareMathSymbol{\cyrhard}{\mathalpha}{\M@cyrilliclower}{"44A}
+  \DeclareMathSymbol{\cyryeru}{\mathalpha}{\M@cyrilliclower}{"44B}
+  \DeclareMathSymbol{\cyrsoft}{\mathalpha}{\M@cyrilliclower}{"44C}
+  \DeclareMathSymbol{\cyre}{\mathalpha}{\M@cyrilliclower}{"44D}
+  \DeclareMathSymbol{\cyryu}{\mathalpha}{\M@cyrilliclower}{"44E}
+  \DeclareMathSymbol{\cyrya}{\mathalpha}{\M@cyrilliclower}{"44F}
+  \DeclareMathSymbol{\cyrvari}{\mathalpha}{\M@cyrilliclower}{"439}}
+\def\M@hebrew@set{%
+  \edef\M@hebrew{M\@hebrewshape\the\M@count}
+  \DeclareMathSymbol{\aleph}{\mathalpha}{\M@hebrew}{"5D0}
+  \DeclareMathSymbol{\beth}{\mathalpha}{\M@hebrew}{"5D1}
+  \DeclareMathSymbol{\gimel}{\mathalpha}{\M@hebrew}{"5D2}
+  \DeclareMathSymbol{\daleth}{\mathalpha}{\M@hebrew}{"5D3}
+  \DeclareMathSymbol{\he}{\mathalpha}{\M@hebrew}{"5D4}
+  \DeclareMathSymbol{\vav}{\mathalpha}{\M@hebrew}{"5D5}
+  \DeclareMathSymbol{\zayin}{\mathalpha}{\M@hebrew}{"5D6}
+  \DeclareMathSymbol{\het}{\mathalpha}{\M@hebrew}{"5D7}
+  \DeclareMathSymbol{\tet}{\mathalpha}{\M@hebrew}{"5D8}
+  \DeclareMathSymbol{\yod}{\mathalpha}{\M@hebrew}{"5D9}
+  \DeclareMathSymbol{\kaf}{\mathalpha}{\M@hebrew}{"5DB}
+  \DeclareMathSymbol{\lamed}{\mathalpha}{\M@hebrew}{"5DC}
+  \DeclareMathSymbol{\mem}{\mathalpha}{\M@hebrew}{"5DE}
+  \DeclareMathSymbol{\nun}{\mathalpha}{\M@hebrew}{"5E0}
+  \DeclareMathSymbol{\samekh}{\mathalpha}{\M@hebrew}{"5E1}
+  \DeclareMathSymbol{\ayin}{\mathalpha}{\M@hebrew}{"5E2}
+  \DeclareMathSymbol{\pe}{\mathalpha}{\M@hebrew}{"5E4}
+  \DeclareMathSymbol{\tsadi}{\mathalpha}{\M@hebrew}{"5E6}
+  \DeclareMathSymbol{\qof}{\mathalpha}{\M@hebrew}{"5E7}
+  \DeclareMathSymbol{\resh}{\mathalpha}{\M@hebrew}{"5E8}
+  \DeclareMathSymbol{\shin}{\mathalpha}{\M@hebrew}{"5E9}
+  \DeclareMathSymbol{\tav}{\mathalpha}{\M@hebrew}{"5EA}
+  \DeclareMathSymbol{\varkaf}{\mathalpha}{\M@hebrew}{"5DA}
+  \DeclareMathSymbol{\varmem}{\mathalpha}{\M@hebrew}{"5DD}
+  \DeclareMathSymbol{\varnun}{\mathalpha}{\M@hebrew}{"5DF}
+  \DeclareMathSymbol{\varpe}{\mathalpha}{\M@hebrew}{"5E3}
+  \DeclareMathSymbol{\vartsadi}{\mathalpha}{\M@hebrew}{"5E5}}
+\def\M@digits@set{%
+  \edef\M@digits{M\@digitsshape\the\M@count}
+  \DeclareMathSymbol{0}{\mathalpha}{\M@digits}{`0}
+  \DeclareMathSymbol{1}{\mathalpha}{\M@digits}{`1}
+  \DeclareMathSymbol{2}{\mathalpha}{\M@digits}{`2}
+  \DeclareMathSymbol{3}{\mathalpha}{\M@digits}{`3}
+  \DeclareMathSymbol{4}{\mathalpha}{\M@digits}{`4}
+  \DeclareMathSymbol{5}{\mathalpha}{\M@digits}{`5}
+  \DeclareMathSymbol{6}{\mathalpha}{\M@digits}{`6}
+  \DeclareMathSymbol{7}{\mathalpha}{\M@digits}{`7}
+  \DeclareMathSymbol{8}{\mathalpha}{\M@digits}{`8}
+  \DeclareMathSymbol{9}{\mathalpha}{\M@digits}{`9}}
+\def\M@operator@set{%
+  \edef\operator@font{\noexpand\mathgroup
+    \expandafter\noexpand\csname symM\@operatorshape\the\M@count\endcsname}}
+\def\M@symbols@set{%
+  \edef\M@symbols{M\@symbolsshape\the\M@count}
+  \let\colon\@undefined
+  \let\mathellipsis\@undefined
+  \DeclareMathSymbol{.}{\mathord}{\M@symbols}{"2E}
+  \DeclareMathSymbol{@}{\mathord}{\M@symbols}{"40}
+  \DeclareMathSymbol{\mathhash}{\mathord}{\M@symbols}{"23}
+  \DeclareMathSymbol{\mathdollar}{\mathord}{\M@symbols}{"24}
+  \DeclareMathSymbol{\mathpercent}{\mathord}{\M@symbols}{"25}
+  \DeclareMathSymbol{\mathand}{\mathord}{\M@symbols}{"26}
+  \DeclareMathSymbol{\mathparagraph}{\mathord}{\M@symbols}{"B6}
+  \DeclareMathSymbol{\mathsection}{\mathord}{\M@symbols}{"A7}
+  \DeclareMathSymbol{\mathsterling}{\mathord}{\M@symbols}{"A3}
+  \DeclareMathSymbol{|}{\mathord}{\M@symbols}{"7C}
+  \DeclareMathSymbol{\neg}{\mathord}{\M@symbols}{"AC}
+  \DeclareMathSymbol{\infty}{\mathord}{\M@symbols}{"221E}
+  \DeclareMathSymbol{\partial}{\mathord}{\M@symbols}{"2202}
+  \DeclareMathSymbol{\mathbackslash}{\mathord}{\M@symbols}{"5C}
+  \DeclareMathSymbol{\degree}{\mathord}{\M@symbols}{"B0}
+  \DeclareMathSymbol{\increment}{\mathord}{\M@symbols}{"2206}
+  \DeclareMathSymbol{\hbar}{\mathord}{\M@symbols}{"127}
+  \DeclareMathSymbol{'}{\mathord}{\M@symbols}{"2032}
+  \DeclareMathSymbol{"}{\mathord}{\M@symbols}{"2033}
+  \DeclareMathSymbol{\comma}{\mathord}{\M@symbols}{"2C}
+  \DeclareMathSymbol{+}{\mathbin}{\M@symbols}{"2B}
+  \DeclareMathSymbol{-}{\mathbin}{\M@symbols}{"2212}
+  \DeclareMathSymbol{*}{\mathbin}{\M@symbols}{"2A}
+  \DeclareMathSymbol{\times}{\mathbin}{\M@symbols}{"D7}
+  \DeclareMathSymbol{/}{\mathbin}{\M@symbols}{"2215}
+  \DeclareMathSymbol{\div}{\mathbin}{\M@symbols}{"F7}
+  \DeclareMathSymbol{\pm}{\mathbin}{\M@symbols}{"B1}
+  \DeclareMathSymbol{\bullet}{\mathbin}{\M@symbols}{"2022}
+  \DeclareMathSymbol{\dagger}{\mathbin}{\M@symbols}{"2020}
+  \DeclareMathSymbol{\ddagger}{\mathbin}{\M@symbols}{"2021}
+  \DeclareMathSymbol{\cdot}{\mathbin}{\M@symbols}{"2219}
+  \DeclareMathSymbol{\setminus}{\mathbin}{\M@symbols}{"5C}
+  \DeclareMathSymbol{=}{\mathrel}{\M@symbols}{"3D}
+  \DeclareMathSymbol{<}{\mathrel}{\M@symbols}{"3C}
+  \DeclareMathSymbol{>}{\mathrel}{\M@symbols}{"3E}
+  \DeclareMathSymbol{\leq}{\mathrel}{\M@symbols}{"2264}
+  \DeclareMathSymbol{\geq}{\mathrel}{\M@symbols}{"2265}
+  \DeclareMathSymbol{\sim}{\mathrel}{\M@symbols}{"7E}
+  \DeclareMathSymbol{\approx}{\mathrel}{\M@symbols}{"2248}
+  \DeclareMathSymbol{\equiv}{\mathrel}{\M@symbols}{"2261}
+  \DeclareMathSymbol{\mid}{\mathrel}{\M@symbols}{"7C}
+  \DeclareMathSymbol{\parallel}{\mathrel}{\M@symbols}{"2016}
+  \DeclareMathSymbol{:}{\mathrel}{\M@symbols}{"3A}
+  \DeclareMathSymbol{?}{\mathclose}{\M@symbols}{"3F}
+  \DeclareMathSymbol{!}{\mathclose}{\M@symbols}{"21}
+  \DeclareMathSymbol{,}{\mathpunct}{\M@symbols}{"2C}
+  \DeclareMathSymbol{;}{\mathpunct}{\M@symbols}{"3B}
+  \DeclareMathSymbol{\colon}{\mathpunct}{\M@symbols}{"3A}
+  \DeclareMathSymbol{\mathellipsis}{\mathinner}{\M@symbols}{"2026}
+  \DeclareRobustCommand\#{\ifmmode\mathhash\else\char"23\relax\fi}
+  \DeclareRobustCommand\%{\ifmmode\mathpercent\else\char"25\relax\fi}
+  \DeclareRobustCommand\&{\ifmmode\mathand\else\char"26\relax\fi}
+  \DeclareMathSymbol{\@relbar}{\mathbin}{symbols}{"00}
+  \DeclareMathSymbol{\@Relbar}{\mathrel}{operators}{"3D}
+  \DeclareMathSymbol{\@verticalbar}{\mathord}{symbols}{"6A}
+  \DeclareRobustCommand\relbar{\mathrel{\smash\@relbar}}
+  \DeclareRobustCommand\Relbar{\mathrel{\@Relbar}}
+  \DeclareRobustCommand\models{\mathrel{\@verticalbar}\joinrel\Relbar}}
+\def\M@extsymbols@set{%
+  \edef\M@extsymbols{M\@extsymbolsshape\the\M@count}
+  \let\angle\@undefined
+  \let\sqsubset\@undefined
+  \let\sqsupset\@undefined
+  \let\bowtie\@undefined
+  \let\doteq\@undefined
+  \let\neq\@undefined
+  \let\ng\@undefined
+  \DeclareMathSymbol{\wp}{\mathord}{\M@extsymbols}{"2118}
+  \DeclareMathSymbol{\Re}{\mathord}{\M@extsymbols}{"211C}
+  \DeclareMathSymbol{\Im}{\mathord}{\M@extsymbols}{"2111}
+  \DeclareMathSymbol{\ell}{\mathord}{\M@extsymbols}{"2113}
+  \DeclareMathSymbol{\forall}{\mathord}{\M@extsymbols}{"2200}
+  \DeclareMathSymbol{\exists}{\mathord}{\M@extsymbols}{"2203}
+  \DeclareMathSymbol{\emptyset}{\mathord}{\M@extsymbols}{"2205}
+  \DeclareMathSymbol{\nabla}{\mathord}{\M@extsymbols}{"2207}
+  \DeclareMathSymbol{\in}{\mathord}{\M@extsymbols}{"2208}
+  \DeclareMathSymbol{\ni}{\mathord}{\M@extsymbols}{"220B}
+  \DeclareMathSymbol{\mp}{\mathord}{\M@extsymbols}{"2213}
+  \DeclareMathSymbol{\angle}{\mathord}{\M@extsymbols}{"2220}
+  \DeclareMathSymbol{\top}{\mathord}{\M@extsymbols}{"22A4}
+  \DeclareMathSymbol{\bot}{\mathord}{\M@extsymbols}{"22A5}
+  \DeclareMathSymbol{\vdash}{\mathord}{\M@extsymbols}{"22A2}
+  \DeclareMathSymbol{\dashv}{\mathord}{\M@extsymbols}{"22A3}
+  \DeclareMathSymbol{\flat}{\mathord}{\M@extsymbols}{"266D}
+  \DeclareMathSymbol{\natural}{\mathord}{\M@extsymbols}{"266E}
+  \DeclareMathSymbol{\sharp}{\mathord}{\M@extsymbols}{"266F}
+  \DeclareMathSymbol{\fflat}{\mathord}{\M@extsymbols}{"1D12B}
+  \DeclareMathSymbol{\ssharp}{\mathord}{\M@extsymbols}{"1D12A}
+  \DeclareMathSymbol{\bclubsuit}{\mathord}{\M@extsymbols}{"2663}
+    \let\clubsuit\bclubsuit
+  \DeclareMathSymbol{\bdiamondsuit}{\mathord}{\M@extsymbols}{"2666}
+  \DeclareMathSymbol{\bheartsuit}{\mathord}{\M@extsymbols}{"2665}
+  \DeclareMathSymbol{\bspadesuit}{\mathord}{\M@extsymbols}{"2660}
+    \let\spadesuit\bspadesuit
+  \DeclareMathSymbol{\wclubsuit}{\mathord}{\M@extsymbols}{"2667}
+  \DeclareMathSymbol{\wdiamondsuit}{\mathord}{\M@extsymbols}{"2662}
+    \let\diamondsuit\wdiamondsuit
+  \DeclareMathSymbol{\wheartsuit}{\mathord}{\M@extsymbols}{"2661}
+    \let\heartsuit\wheartsuit
+  \DeclareMathSymbol{\wspadesuit}{\mathord}{\M@extsymbols}{"2664}
+  \DeclareMathSymbol{\wedge}{\mathbin}{\M@extsymbols}{"2227}
+  \DeclareMathSymbol{\vee}{\mathbin}{\M@extsymbols}{"2228}
+  \DeclareMathSymbol{\cap}{\mathord}{\M@extsymbols}{"2229}
+  \DeclareMathSymbol{\cup}{\mathbin}{\M@extsymbols}{"222A}
+  \DeclareMathSymbol{\sqcap}{\mathbin}{\M@extsymbols}{"2293}
+  \DeclareMathSymbol{\sqcup}{\mathbin}{\M@extsymbols}{"2294}
+  \DeclareMathSymbol{\amalg}{\mathbin}{\M@extsymbols}{"2A3F}
+  \DeclareMathSymbol{\wr}{\mathbin}{\M@extsymbols}{"2240}
+  \DeclareMathSymbol{\ast}{\mathbin}{\M@extsymbols}{"2217}
+  \DeclareMathSymbol{\star}{\mathbin}{\M@extsymbols}{"22C6}
+  \DeclareMathSymbol{\diamond}{\mathbin}{\M@extsymbols}{"22C4}
+  \DeclareMathSymbol{\varcdot}{\mathbin}{\M@extsymbols}{"22C5}
+  \DeclareMathSymbol{\varsetminus}{\mathbin}{\M@extsymbols}{"2216}
+  \DeclareMathSymbol{\oplus}{\mathbin}{\M@extsymbols}{"2295}
+  \DeclareMathSymbol{\otimes}{\mathbin}{\M@extsymbols}{"2297}
+  \DeclareMathSymbol{\ominus}{\mathbin}{\M@extsymbols}{"2296}
+  \DeclareMathSymbol{\odiv}{\mathbin}{\M@extsymbols}{"2A38}
+  \DeclareMathSymbol{\oslash}{\mathbin}{\M@extsymbols}{"2298}
+  \DeclareMathSymbol{\odot}{\mathbin}{\M@extsymbols}{"2299}
+  \DeclareMathSymbol{\sqplus}{\mathbin}{\M@extsymbols}{"229E}
+  \DeclareMathSymbol{\sqtimes}{\mathbin}{\M@extsymbols}{"22A0}
+  \DeclareMathSymbol{\sqminus}{\mathbin}{\M@extsymbols}{"229F}
+  \DeclareMathSymbol{\sqdot}{\mathbin}{\M@extsymbols}{"22A1}
+  \DeclareMathSymbol{\in}{\mathrel}{\M@extsymbols}{"2208}
+  \DeclareMathSymbol{\ni}{\mathrel}{\M@extsymbols}{"220B}
+  \DeclareMathSymbol{\subset}{\mathrel}{\M@extsymbols}{"2282}
+  \DeclareMathSymbol{\supset}{\mathrel}{\M@extsymbols}{"2283}
+  \DeclareMathSymbol{\subseteq}{\mathrel}{\M@extsymbols}{"2286}
+  \DeclareMathSymbol{\supseteq}{\mathrel}{\M@extsymbols}{"2287}
+  \DeclareMathSymbol{\sqsubset}{\mathrel}{\M@extsymbols}{"228F}
+  \DeclareMathSymbol{\sqsupset}{\mathrel}{\M@extsymbols}{"2290}
+  \DeclareMathSymbol{\sqsubseteq}{\mathrel}{\M@extsymbols}{"2291}
+  \DeclareMathSymbol{\sqsupseteq}{\mathrel}{\M@extsymbols}{"2292}
+  \DeclareMathSymbol{\triangleleft}{\mathrel}{\M@extsymbols}{"22B2}
+  \DeclareMathSymbol{\triangleright}{\mathrel}{\M@extsymbols}{"22B3}
+  \DeclareMathSymbol{\trianglelefteq}{\mathrel}{\M@extsymbols}{"22B4}
+  \DeclareMathSymbol{\trianglerighteq}{\mathrel}{\M@extsymbols}{"22B5}
+  \DeclareMathSymbol{\propto}{\mathrel}{\M@extsymbols}{"221D}
+  \DeclareMathSymbol{\bowtie}{\mathrel}{\M@extsymbols}{"22C8}
+  \DeclareMathSymbol{\hourglass}{\mathrel}{\M@extsymbols}{"29D6}
+  \DeclareMathSymbol{\therefore}{\mathrel}{\M@extsymbols}{"2234}
+  \DeclareMathSymbol{\because}{\mathrel}{\M@extsymbols}{"2235}
+  \DeclareMathSymbol{\ratio}{\mathrel}{\M@extsymbols}{"2236}
+  \DeclareMathSymbol{\proportion}{\mathrel}{\M@extsymbols}{"2237}
+  \DeclareMathSymbol{\ll}{\mathrel}{\M@extsymbols}{"226A}
+  \DeclareMathSymbol{\gg}{\mathrel}{\M@extsymbols}{"226B}
+  \DeclareMathSymbol{\lll}{\mathrel}{\M@extsymbols}{"22D8}
+  \DeclareMathSymbol{\ggg}{\mathrel}{\M@extsymbols}{"22D9}
+  \DeclareMathSymbol{\leqq}{\mathrel}{\M@extsymbols}{"2266}
+  \DeclareMathSymbol{\geqq}{\mathrel}{\M@extsymbols}{"2267}
+  \DeclareMathSymbol{\lapprox}{\mathrel}{\M@extsymbols}{"2A85}
+  \DeclareMathSymbol{\gapprox}{\mathrel}{\M@extsymbols}{"2A86}
+  \DeclareMathSymbol{\simeq}{\mathrel}{\M@extsymbols}{"2243}
+  \DeclareMathSymbol{\eqsim}{\mathrel}{\M@extsymbols}{"2242}
+  \DeclareMathSymbol{\simeqq}{\mathrel}{\M@extsymbols}{"2245}
+    \let\cong\simeqq
+  \DeclareMathSymbol{\approxeq}{\mathrel}{\M@extsymbols}{"224A}
+  \DeclareMathSymbol{\sssim}{\mathrel}{\M@extsymbols}{"224B}
+  \DeclareMathSymbol{\seq}{\mathrel}{\M@extsymbols}{"224C}
+  \DeclareMathSymbol{\doteq}{\mathrel}{\M@extsymbols}{"2250}
+  \DeclareMathSymbol{\coloneq}{\mathrel}{\M@extsymbols}{"2254}
+  \DeclareMathSymbol{\eqcolon}{\mathrel}{\M@extsymbols}{"2255}
+  \DeclareMathSymbol{\ringeq}{\mathrel}{\M@extsymbols}{"2257}
+  \DeclareMathSymbol{\arceq}{\mathrel}{\M@extsymbols}{"2258}
+  \DeclareMathSymbol{\wedgeeq}{\mathrel}{\M@extsymbols}{"2259}
+  \DeclareMathSymbol{\veeeq}{\mathrel}{\M@extsymbols}{"225A}
+  \DeclareMathSymbol{\stareq}{\mathrel}{\M@extsymbols}{"225B}
+  \DeclareMathSymbol{\triangleeq}{\mathrel}{\M@extsymbols}{"225C}
+  \DeclareMathSymbol{\defeq}{\mathrel}{\M@extsymbols}{"225D}
+  \DeclareMathSymbol{\qeq}{\mathrel}{\M@extsymbols}{"225F}
+  \DeclareMathSymbol{\lsim}{\mathrel}{\M@extsymbols}{"2272}
+  \DeclareMathSymbol{\gsim}{\mathrel}{\M@extsymbols}{"2273}
+  \DeclareMathSymbol{\prec}{\mathrel}{\M@extsymbols}{"227A}
+  \DeclareMathSymbol{\succ}{\mathrel}{\M@extsymbols}{"227B}
+  \DeclareMathSymbol{\preceq}{\mathrel}{\M@extsymbols}{"227C}
+  \DeclareMathSymbol{\succeq}{\mathrel}{\M@extsymbols}{"227D}
+  \DeclareMathSymbol{\preceqq}{\mathrel}{\M@extsymbols}{"2AB3}
+  \DeclareMathSymbol{\succeqq}{\mathrel}{\M@extsymbols}{"2AB4}
+  \DeclareMathSymbol{\precsim}{\mathrel}{\M@extsymbols}{"227E}
+  \DeclareMathSymbol{\succsim}{\mathrel}{\M@extsymbols}{"227F}
+  \DeclareMathSymbol{\precapprox}{\mathrel}{\M@extsymbols}{"2AB7}
+  \DeclareMathSymbol{\succapprox}{\mathrel}{\M@extsymbols}{"2AB8}
+  \DeclareMathSymbol{\precprec}{\mathrel}{\M@extsymbols}{"2ABB}
+  \DeclareMathSymbol{\succsucc}{\mathrel}{\M@extsymbols}{"2ABC}
+  \DeclareMathSymbol{\asymp}{\mathrel}{\M@extsymbols}{"224D}
+  \DeclareMathSymbol{\nin}{\mathrel}{\M@extsymbols}{"2209}
+  \DeclareMathSymbol{\nni}{\mathrel}{\M@extsymbols}{"220C}
+  \DeclareMathSymbol{\nsubset}{\mathrel}{\M@extsymbols}{"2284}
+  \DeclareMathSymbol{\nsupset}{\mathrel}{\M@extsymbols}{"2285}
+  \DeclareMathSymbol{\nsubseteq}{\mathrel}{\M@extsymbols}{"2288}
+  \DeclareMathSymbol{\nsupseteq}{\mathrel}{\M@extsymbols}{"2289}
+  \DeclareMathSymbol{\subsetneq}{\mathrel}{\M@extsymbols}{"228A}
+  \DeclareMathSymbol{\supsetneq}{\mathrel}{\M@extsymbols}{"228B}
+  \DeclareMathSymbol{\nsqsubseteq}{\mathrel}{\M@extsymbols}{"22E2}
+  \DeclareMathSymbol{\nsqsupseteq}{\mathrel}{\M@extsymbols}{"22E3}
+  \DeclareMathSymbol{\sqsubsetneq}{\mathrel}{\M@extsymbols}{"22E4}
+  \DeclareMathSymbol{\sqsupsetneq}{\mathrel}{\M@extsymbols}{"22E5}
+  \DeclareMathSymbol{\neq}{\mathrel}{\M@extsymbols}{"2260}
+  \DeclareMathSymbol{\nl}{\mathrel}{\M@extsymbols}{"226E}
+  \DeclareMathSymbol{\ng}{\mathrel}{\M@extsymbols}{"226F}
+  \DeclareMathSymbol{\nleq}{\mathrel}{\M@extsymbols}{"2270}
+  \DeclareMathSymbol{\ngeq}{\mathrel}{\M@extsymbols}{"2271}
+  \DeclareMathSymbol{\lneq}{\mathrel}{\M@extsymbols}{"2A87}
+  \DeclareMathSymbol{\gneq}{\mathrel}{\M@extsymbols}{"2A88}
+  \DeclareMathSymbol{\lneqq}{\mathrel}{\M@extsymbols}{"2268}
+  \DeclareMathSymbol{\gneqq}{\mathrel}{\M@extsymbols}{"2269}
+  \DeclareMathSymbol{\ntriangleleft}{\mathrel}{\M@extsymbols}{"22EA}
+  \DeclareMathSymbol{\ntriangleright}{\mathrel}{\M@extsymbols}{"22EB}
+  \DeclareMathSymbol{\ntrianglelefteq}{\mathrel}{\M@extsymbols}{"22EC}
+  \DeclareMathSymbol{\ntrianglerighteq}{\mathrel}{\M@extsymbols}{"22ED}
+  \DeclareMathSymbol{\nsim}{\mathrel}{\M@extsymbols}{"2241}
+  \DeclareMathSymbol{\napprox}{\mathrel}{\M@extsymbols}{"2249}
+  \DeclareMathSymbol{\nsimeq}{\mathrel}{\M@extsymbols}{"2244}
+  \DeclareMathSymbol{\nsimeqq}{\mathrel}{\M@extsymbols}{"2247}
+  \DeclareMathSymbol{\simneqq}{\mathrel}{\M@extsymbols}{"2246}
+  \DeclareMathSymbol{\nlsim}{\mathrel}{\M@extsymbols}{"2274}
+  \DeclareMathSymbol{\ngsim}{\mathrel}{\M@extsymbols}{"2275}
+  \DeclareMathSymbol{\lnsim}{\mathrel}{\M@extsymbols}{"22E6}
+  \DeclareMathSymbol{\gnsim}{\mathrel}{\M@extsymbols}{"22E7}
+  \DeclareMathSymbol{\lnapprox}{\mathrel}{\M@extsymbols}{"2A89}
+  \DeclareMathSymbol{\gnapprox}{\mathrel}{\M@extsymbols}{"2A8A}
+  \DeclareMathSymbol{\nprec}{\mathrel}{\M@extsymbols}{"2280}
+  \DeclareMathSymbol{\nsucc}{\mathrel}{\M@extsymbols}{"2281}
+  \DeclareMathSymbol{\npreceq}{\mathrel}{\M@extsymbols}{"22E0}
+  \DeclareMathSymbol{\nsucceq}{\mathrel}{\M@extsymbols}{"22E1}
+  \DeclareMathSymbol{\precneq}{\mathrel}{\M@extsymbols}{"2AB1}
+  \DeclareMathSymbol{\succneq}{\mathrel}{\M@extsymbols}{"2AB2}
+  \DeclareMathSymbol{\precneqq}{\mathrel}{\M@extsymbols}{"2AB5}
+  \DeclareMathSymbol{\succneqq}{\mathrel}{\M@extsymbols}{"2AB6}
+  \DeclareMathSymbol{\precnsim}{\mathrel}{\M@extsymbols}{"22E8}
+  \DeclareMathSymbol{\succnsim}{\mathrel}{\M@extsymbols}{"22E9}
+  \DeclareMathSymbol{\precnapprox}{\mathrel}{\M@extsymbols}{"2AB9}
+  \DeclareMathSymbol{\succnapprox}{\mathrel}{\M@extsymbols}{"2ABA}
+  \DeclareMathSymbol{\nequiv}{\mathrel}{\M@extsymbols}{"2262}}
+\def\M@delimiters@set{%
+  \edef\M@delimiters{M\@delimitersshape\the\M@count}
+  \DeclareMathSymbol{(}{\mathopen}{\M@delimiters}{"28}
+  \DeclareMathSymbol{)}{\mathclose}{\M@delimiters}{"29}
+  \DeclareMathSymbol{[}{\mathopen}{\M@delimiters}{"5B}
+  \DeclareMathSymbol{]}{\mathclose}{\M@delimiters}{"5D}
+  \DeclareMathSymbol{\leftbrace}{\mathopen}{\M@delimiters}{"7B}
+  \DeclareMathSymbol{\rightbrace}{\mathclose}{\M@delimiters}{"7D}}
+\def\M@arrows@set{%
+  \edef\M@arrows{M\@arrowsshape\the\M@count}
+  \let\uparrow\@undefined
+  \let\Uparrow\@undefined
+  \let\downarrow\@undefined
+  \let\Downarrow\@undefined
+  \let\updownarrow\@undefined
+  \let\Updownarrow\@undefined
+  \let\longrightarrow\@undefined
+  \let\longleftarrow\@undefined
+  \let\longleftrightarrow\@undefined
+  \let\hookrightarrow\@undefined
+  \let\hookleftarrow\@undefined
+  \let\Longrightarrow\@undefined
+  \let\Longleftarrow\@undefined
+  \let\Longleftrightarrow\@undefined
+  \let\rightleftharpoons\@undefined
+  \DeclareMathSymbol{\rightarrow}{\mathrel}{\M@arrows}{"2192}
+    \let\to\rightarrow
+  \DeclareMathSymbol{\nrightarrow}{\mathrel}{\M@arrows}{"219B}
+  \DeclareMathSymbol{\Rightarrow}{\mathrel}{\M@arrows}{"21D2}
+  \DeclareMathSymbol{\nRightarrow}{\mathrel}{\M@arrows}{"21CF}
+  \DeclareMathSymbol{\Rrightarrow}{\mathrel}{\M@arrows}{"21DB}
+  \DeclareMathSymbol{\longrightarrow}{\mathrel}{\M@arrows}{"27F6}
+  \DeclareMathSymbol{\Longrightarrow}{\mathrel}{\M@arrows}{"27F9}
+  \DeclareMathSymbol{\rightbararrow}{\mathrel}{\M@arrows}{"21A6}
+    \let\mapsto\rightbararrow
+  \DeclareMathSymbol{\Rightbararrow}{\mathrel}{\M@arrows}{"2907}
+  \DeclareMathSymbol{\longrightbararrow}{\mathrel}{\M@arrows}{"27FC}
+    \let\longmapsto\longrightbararrow
+  \DeclareMathSymbol{\Longrightbararrow}{\mathrel}{\M@arrows}{"27FE}
+  \DeclareMathSymbol{\hookrightarrow}{\mathrel}{\M@arrows}{"21AA}
+  \DeclareMathSymbol{\rightdasharrow}{\mathrel}{\M@arrows}{"21E2}
+  \DeclareMathSymbol{\rightharpoonup}{\mathrel}{\M@arrows}{"21C0}
+  \DeclareMathSymbol{\rightharpoondown}{\mathrel}{\M@arrows}{"21C1}
+  \DeclareMathSymbol{\rightarrowtail}{\mathrel}{\M@arrows}{"21A3}
+  \DeclareMathSymbol{\rightoplusarrow}{\mathrel}{\M@arrows}{"27F4}
+  \DeclareMathSymbol{\rightwavearrow}{\mathrel}{\M@arrows}{"219D}
+  \DeclareMathSymbol{\rightsquigarrow}{\mathrel}{\M@arrows}{"21DD}
+  \DeclareMathSymbol{\longrightsquigarrow}{\mathrel}{\M@arrows}{"27FF}
+  \DeclareMathSymbol{\looparrowright}{\mathrel}{\M@arrows}{"21AC}
+  \DeclareMathSymbol{\curvearrowright}{\mathrel}{\M@arrows}{"293B}
+  \DeclareMathSymbol{\circlearrowright}{\mathrel}{\M@arrows}{"21BB}
+  \DeclareMathSymbol{\twoheadrightarrow}{\mathrel}{\M@arrows}{"21A0}
+  \DeclareMathSymbol{\rightarrowtobar}{\mathrel}{\M@arrows}{"21E5}
+  \DeclareMathSymbol{\rightwhitearrow}{\mathrel}{\M@arrows}{"21E8}
+  \DeclareMathSymbol{\rightrightarrows}{\mathrel}{\M@arrows}{"21C9}
+  \DeclareMathSymbol{\rightrightrightarrows}{\mathrel}{\M@arrows}{"21F6}
+  \DeclareMathSymbol{\leftarrow}{\mathrel}{\M@arrows}{"2190}
+    \let\from\leftarrow
+  \DeclareMathSymbol{\nleftarrow}{\mathrel}{\M@arrows}{"219A}
+  \DeclareMathSymbol{\Leftarrow}{\mathrel}{\M@arrows}{"21D0}
+  \DeclareMathSymbol{\nLeftarrow}{\mathrel}{\M@arrows}{"21CD}
+  \DeclareMathSymbol{\Lleftarrow}{\mathrel}{\M@arrows}{"21DA}
+  \DeclareMathSymbol{\longleftarrow}{\mathrel}{\M@arrows}{"27F5}
+  \DeclareMathSymbol{\Longleftarrow}{\mathrel}{\M@arrows}{"27F8}
+  \DeclareMathSymbol{\leftbararrow}{\mathrel}{\M@arrows}{"21A4}
+    \let\mapsfrom\leftbararrow
+  \DeclareMathSymbol{\Leftbararrow}{\mathrel}{\M@arrows}{"2906}
+  \DeclareMathSymbol{\longleftbararrow}{\mathrel}{\M@arrows}{"27FB}
+    \let\longmapsfrom\longleftbararrow
+  \DeclareMathSymbol{\Longleftbararrow}{\mathrel}{\M@arrows}{"27FD}
+  \DeclareMathSymbol{\hookleftarrow}{\mathrel}{\M@arrows}{"21A9}
+  \DeclareMathSymbol{\leftdasharrow}{\mathrel}{\M@arrows}{"21E0}
+  \DeclareMathSymbol{\leftharpoonup}{\mathrel}{\M@arrows}{"21C0}
+  \DeclareMathSymbol{\leftharpoondown}{\mathrel}{\M@arrows}{"21C1}
+  \DeclareMathSymbol{\leftarrowtail}{\mathrel}{\M@arrows}{"21A2}
+  \DeclareMathSymbol{\leftoplusarrow}{\mathrel}{\M@arrows}{"2B32}
+  \DeclareMathSymbol{\leftwavearrow}{\mathrel}{\M@arrows}{"219C}
+  \DeclareMathSymbol{\leftsquigarrow}{\mathrel}{\M@arrows}{"21DC}
+  \DeclareMathSymbol{\longleftsquigarrow}{\mathrel}{\M@arrows}{"2B33}
+  \DeclareMathSymbol{\looparrowleft}{\mathrel}{\M@arrows}{"21AB}
+  \DeclareMathSymbol{\curvearrowleft}{\mathrel}{\M@arrows}{"293A}
+  \DeclareMathSymbol{\circlearrowleft}{\mathrel}{\M@arrows}{"21BA}
+  \DeclareMathSymbol{\twoheadleftarrow}{\mathrel}{\M@arrows}{"219E}
+  \DeclareMathSymbol{\leftarrowtobar}{\mathrel}{\M@arrows}{"21E4}
+  \DeclareMathSymbol{\leftwhitearrow}{\mathrel}{\M@arrows}{"21E6}
+  \DeclareMathSymbol{\leftleftarrows}{\mathrel}{\M@arrows}{"21C7}
+  \DeclareMathSymbol{\leftleftleftarrows}{\mathrel}{\M@arrows}{"2B31}
+  \DeclareMathSymbol{\leftrightarrow}{\mathrel}{\M@arrows}{"2194}
+  \DeclareMathSymbol{\Leftrightarrow}{\mathrel}{\M@arrows}{"21D4}
+  \DeclareMathSymbol{\nLeftrightarrow}{\mathrel}{\M@arrows}{"21CE}
+  \DeclareMathSymbol{\longleftrightarrow}{\mathrel}{\M@arrows}{"27F7}
+  \DeclareMathSymbol{\Longleftrightarrow}{\mathrel}{\M@arrows}{"27FA}
+  \DeclareMathSymbol{\leftrightwavearrow}{\mathrel}{\M@arrows}{"21AD}
+  \DeclareMathSymbol{\leftrightarrows}{\mathrel}{\M@arrows}{"21C6}
+  \DeclareMathSymbol{\leftrightharpoons}{\mathrel}{\M@arrows}{"21CB}
+  \DeclareMathSymbol{\leftrightarrowstobar}{\mathrel}{\M@arrows}{"21B9}
+  \DeclareMathSymbol{\rightleftarrows}{\mathrel}{\M@arrows}{"21C4}
+  \DeclareMathSymbol{\rightleftharpoons}{\mathrel}{\M@arrows}{"21CC}
+  \DeclareMathSymbol{\uparrow}{\mathrel}{\M@arrows}{"2191}
+  \DeclareMathSymbol{\Uparrow}{\mathrel}{\M@arrows}{"21D1}
+  \DeclareMathSymbol{\Uuparrow}{\mathrel}{\M@arrows}{"290A}
+  \DeclareMathSymbol{\upbararrow}{\mathrel}{\M@arrows}{"21A5}
+  \DeclareMathSymbol{\updasharrow}{\mathrel}{\M@arrows}{"21E1}
+  \DeclareMathSymbol{\upharpoonleft}{\mathrel}{\M@arrows}{"21BF}
+  \DeclareMathSymbol{\upharpoonright}{\mathrel}{\M@arrows}{"21BE}
+  \DeclareMathSymbol{\twoheaduparrow}{\mathrel}{\M@arrows}{"219F}
+  \DeclareMathSymbol{\uparrowtobar}{\mathrel}{\M@arrows}{"2912}
+  \DeclareMathSymbol{\upwhitearrow}{\mathrel}{\M@arrows}{"21E7}
+  \DeclareMathSymbol{\upwhitebararrow}{\mathrel}{\M@arrows}{"21EA}
+  \DeclareMathSymbol{\upuparrows}{\mathrel}{\M@arrows}{"21C8}
+  \DeclareMathSymbol{\downarrow}{\mathrel}{\M@arrows}{"2193}
+  \DeclareMathSymbol{\Downarrow}{\mathrel}{\M@arrows}{"21D3}
+  \DeclareMathSymbol{\Ddownarrow}{\mathrel}{\M@arrows}{"290B}
+  \DeclareMathSymbol{\downbararrow}{\mathrel}{\M@arrows}{"21A7}
+  \DeclareMathSymbol{\downdasharrow}{\mathrel}{\M@arrows}{"21E3}
+  \DeclareMathSymbol{\zigzagarrow}{\mathrel}{\M@arrows}{"21AF}
+    \let\lightningboltarrow\zigzagarrow
+  \DeclareMathSymbol{\downharpoonleft}{\mathrel}{\M@arrows}{"21C3}
+  \DeclareMathSymbol{\downharpoonright}{\mathrel}{\M@arrows}{"21C2}
+  \DeclareMathSymbol{\twoheaddownarrow}{\mathrel}{\M@arrows}{"21A1}
+  \DeclareMathSymbol{\downarrowtobar}{\mathrel}{\M@arrows}{"2913}
+  \DeclareMathSymbol{\downwhitearrow}{\mathrel}{\M@arrows}{"21E9}
+  \DeclareMathSymbol{\downdownarrows}{\mathrel}{\M@arrows}{"21CA}
+  \DeclareMathSymbol{\updownarrow}{\mathrel}{\M@arrows}{"2195}
+  \DeclareMathSymbol{\Updownarrow}{\mathrel}{\M@arrows}{"21D5}
+  \DeclareMathSymbol{\updownarrows}{\mathrel}{\M@arrows}{"21C5}
+  \DeclareMathSymbol{\downuparrows}{\mathrel}{\M@arrows}{"21F5}
+  \DeclareMathSymbol{\updownharpoons}{\mathrel}{\M@arrows}{"296E}
+  \DeclareMathSymbol{\downupharpoons}{\mathrel}{\M@arrows}{"296F}
+  \DeclareMathSymbol{\nearrow}{\mathrel}{\M@arrows}{"2197}
+  \DeclareMathSymbol{\Nearrow}{\mathrel}{\M@arrows}{"21D7}
+  \DeclareMathSymbol{\nwarrow}{\mathrel}{\M@arrows}{"2196}
+  \DeclareMathSymbol{\Nwarrow}{\mathrel}{\M@arrows}{"21D6}
+  \DeclareMathSymbol{\searrow}{\mathrel}{\M@arrows}{"2198}
+  \DeclareMathSymbol{\Searrow}{\mathrel}{\M@arrows}{"21D8}
+  \DeclareMathSymbol{\swarrow}{\mathrel}{\M@arrows}{"2199}
+  \DeclareMathSymbol{\Swarrow}{\mathrel}{\M@arrows}{"21D9}
+  \DeclareMathSymbol{\nwsearrow}{\mathrel}{\M@arrows}{"2921}
+  \DeclareMathSymbol{\neswarrow}{\mathrel}{\M@arrows}{"2922}
+  \DeclareMathSymbol{\lcirclearrow}{\mathrel}{\M@arrows}{"27F2}
+  \DeclareMathSymbol{\rcirclearrow}{\mathrel}{\M@arrows}{"27F3}}
+\def\M@bigops@set{%
+  \edef\M@bigops{M\@bigopsshape\the\M@count}
+  \let\sum\@undefined
+  \let\prod\@undefined
+  \DeclareMathSymbol{\sum}{\mathop}{\M@bigops}{"2211}
+  \DeclareMathSymbol{\prod}{\mathop}{\M@bigops}{"220F}
+  \DeclareMathSymbol{\intop}{\mathop}{\M@bigops}{"222B}}
+\def\M@extbigops@set{%
+  \edef\M@extbigops{M\@extbigopsshape\the\M@count}
+  \let\coprod\@undefined
+  \let\bigvee\@undefined
+  \let\bigwedge\@undefined
+  \let\bigcup\@undefined
+  \let\bigcap\@undefined
+  \let\bigoplus\@undefined
+  \let\bigotimes\@undefined
+  \let\bigodot\@undefined
+  \let\bigsqcup\@undefined
+  \DeclareMathSymbol{\coprod}{\mathop}{\M@extbigops}{"2210}
+  \DeclareMathSymbol{\bigvee}{\mathop}{\M@extbigops}{"22C1}
+  \DeclareMathSymbol{\bigwedge}{\mathop}{\M@extbigops}{"22C0}
+  \DeclareMathSymbol{\bigcup}{\mathop}{\M@extbigops}{"22C3}
+  \DeclareMathSymbol{\bigcap}{\mathord}{\M@extbigops}{"22C2}
+  \DeclareMathSymbol{\iintop}{\mathop}{\M@extbigops}{"222C}
+    \def\iint{\iintop\nolimits}
+  \DeclareMathSymbol{\iiintop}{\mathop}{\M@extbigops}{"222D}
+    \def\iiint{\iiintop\nolimits}
+  \DeclareMathSymbol{\ointop}{\mathop}{\M@extbigops}{"222E}
+    \def\oint{\ointop\nolimits}
+  \DeclareMathSymbol{\oiintop}{\mathop}{\M@extbigops}{"222F}
+    \def\oiint{\oiintop\nolimits}
+  \DeclareMathSymbol{\oiiintop}{\mathop}{\M@extbigops}{"2230}
+    \def\oiiint{\oiiintop\nolimits}
+  \DeclareMathSymbol{\bigoplus}{\mathop}{\M@extbigops}{"2A01}
+  \DeclareMathSymbol{\bigotimes}{\mathop}{\M@extbigops}{"2A02}
+  \DeclareMathSymbol{\bigodot}{\mathop}{\M@extbigops}{"2A00}
+  \DeclareMathSymbol{\bigsqcap}{\mathop}{\M@extbigops}{"2A05}
+  \DeclareMathSymbol{\bigsqcup}{\mathop}{\M@extbigops}{"2A06}}
+\def\M@bb@set{%
+  \edef\M@bb{M\@bbshape\the\M@count}
+  \DeclareMathSymbol{\M@bb@A}{\mathord}{\M@bb}{"1D538}
+  \DeclareMathSymbol{\M@bb@B}{\mathord}{\M@bb}{"1D539}
+  \DeclareMathSymbol{\M@bb@C}{\mathord}{\M@bb}{"2102}
+  \DeclareMathSymbol{\M@bb@D}{\mathord}{\M@bb}{"1D53B}
+  \DeclareMathSymbol{\M@bb@E}{\mathord}{\M@bb}{"1D53C}
+  \DeclareMathSymbol{\M@bb@F}{\mathord}{\M@bb}{"1D53D}
+  \DeclareMathSymbol{\M@bb@G}{\mathord}{\M@bb}{"1D53E}
+  \DeclareMathSymbol{\M@bb@H}{\mathord}{\M@bb}{"210D}
+  \DeclareMathSymbol{\M@bb@I}{\mathord}{\M@bb}{"1D540}
+  \DeclareMathSymbol{\M@bb@J}{\mathord}{\M@bb}{"1D541}
+  \DeclareMathSymbol{\M@bb@K}{\mathord}{\M@bb}{"1D542}
+  \DeclareMathSymbol{\M@bb@L}{\mathord}{\M@bb}{"1D543}
+  \DeclareMathSymbol{\M@bb@M}{\mathord}{\M@bb}{"1D544}
+  \DeclareMathSymbol{\M@bb@N}{\mathord}{\M@bb}{"2115}
+  \DeclareMathSymbol{\M@bb@O}{\mathord}{\M@bb}{"1D546}
+  \DeclareMathSymbol{\M@bb@P}{\mathord}{\M@bb}{"2119}
+  \DeclareMathSymbol{\M@bb@Q}{\mathord}{\M@bb}{"211A}
+  \DeclareMathSymbol{\M@bb@R}{\mathord}{\M@bb}{"211D}
+  \DeclareMathSymbol{\M@bb@S}{\mathord}{\M@bb}{"1D54A}
+  \DeclareMathSymbol{\M@bb@T}{\mathord}{\M@bb}{"1D54B}
+  \DeclareMathSymbol{\M@bb@U}{\mathord}{\M@bb}{"1D54C}
+  \DeclareMathSymbol{\M@bb@V}{\mathord}{\M@bb}{"1D54D}
+  \DeclareMathSymbol{\M@bb@W}{\mathord}{\M@bb}{"1D54E}
+  \DeclareMathSymbol{\M@bb@X}{\mathord}{\M@bb}{"1D54F}
+  \DeclareMathSymbol{\M@bb@Y}{\mathord}{\M@bb}{"1D550}
+  \DeclareMathSymbol{\M@bb@Z}{\mathord}{\M@bb}{"2124}
+  \DeclareMathSymbol{\M@bb@a}{\mathord}{\M@bb}{"1D552}
+  \DeclareMathSymbol{\M@bb@b}{\mathord}{\M@bb}{"1D553}
+  \DeclareMathSymbol{\M@bb@c}{\mathord}{\M@bb}{"1D554}
+  \DeclareMathSymbol{\M@bb@d}{\mathord}{\M@bb}{"1D555}
+  \DeclareMathSymbol{\M@bb@e}{\mathord}{\M@bb}{"1D556}
+  \DeclareMathSymbol{\M@bb@f}{\mathord}{\M@bb}{"1D557}
+  \DeclareMathSymbol{\M@bb@g}{\mathord}{\M@bb}{"1D558}
+  \DeclareMathSymbol{\M@bb@h}{\mathord}{\M@bb}{"1D559}
+  \DeclareMathSymbol{\M@bb@i}{\mathord}{\M@bb}{"1D55A}
+  \DeclareMathSymbol{\M@bb@j}{\mathord}{\M@bb}{"1D55B}
+  \DeclareMathSymbol{\M@bb@k}{\mathord}{\M@bb}{"1D55C}
+  \DeclareMathSymbol{\M@bb@l}{\mathord}{\M@bb}{"1D55D}
+  \DeclareMathSymbol{\M@bb@m}{\mathord}{\M@bb}{"1D55E}
+  \DeclareMathSymbol{\M@bb@n}{\mathord}{\M@bb}{"1D55F}
+  \DeclareMathSymbol{\M@bb@o}{\mathord}{\M@bb}{"1D560}
+  \DeclareMathSymbol{\M@bb@p}{\mathord}{\M@bb}{"1D561}
+  \DeclareMathSymbol{\M@bb@q}{\mathord}{\M@bb}{"1D562}
+  \DeclareMathSymbol{\M@bb@r}{\mathord}{\M@bb}{"1D563}
+  \DeclareMathSymbol{\M@bb@s}{\mathord}{\M@bb}{"1D564}
+  \DeclareMathSymbol{\M@bb@t}{\mathord}{\M@bb}{"1D565}
+  \DeclareMathSymbol{\M@bb@u}{\mathord}{\M@bb}{"1D566}
+  \DeclareMathSymbol{\M@bb@v}{\mathord}{\M@bb}{"1D567}
+  \DeclareMathSymbol{\M@bb@w}{\mathord}{\M@bb}{"1D568}
+  \DeclareMathSymbol{\M@bb@x}{\mathord}{\M@bb}{"1D569}
+  \DeclareMathSymbol{\M@bb@y}{\mathord}{\M@bb}{"1D56A}
+  \DeclareMathSymbol{\M@bb@z}{\mathord}{\M@bb}{"1D56B}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@0\endcsname}{\mathord}{\M@bb}{"1D7D8}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@1\endcsname}{\mathord}{\M@bb}{"1D7D9}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@2\endcsname}{\mathord}{\M@bb}{"1D7DA}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@3\endcsname}{\mathord}{\M@bb}{"1D7DB}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@4\endcsname}{\mathord}{\M@bb}{"1D7DC}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@5\endcsname}{\mathord}{\M@bb}{"1D7DD}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@6\endcsname}{\mathord}{\M@bb}{"1D7DE}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@7\endcsname}{\mathord}{\M@bb}{"1D7DF}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@8\endcsname}{\mathord}{\M@bb}{"1D7E0}
+  \expandafter\DeclareMathSymbol\expandafter
+    {\csname M@bb@9\endcsname}{\mathord}{\M@bb}{"1D7E1}}
+\def\M@cal@set{%
+  \edef\M@cal{M\@calshape\the\M@count}
+  \DeclareMathSymbol{\M@cal@A}{\mathord}{\M@cal}{"1D49C}
+  \DeclareMathSymbol{\M@cal@B}{\mathord}{\M@cal}{"212C}
+  \DeclareMathSymbol{\M@cal@C}{\mathord}{\M@cal}{"1D49E}
+  \DeclareMathSymbol{\M@cal@D}{\mathord}{\M@cal}{"1D49F}
+  \DeclareMathSymbol{\M@cal@E}{\mathord}{\M@cal}{"2130}
+  \DeclareMathSymbol{\M@cal@F}{\mathord}{\M@cal}{"2131}
+  \DeclareMathSymbol{\M@cal@G}{\mathord}{\M@cal}{"1D4A2}
+  \DeclareMathSymbol{\M@cal@H}{\mathord}{\M@cal}{"210B}
+  \DeclareMathSymbol{\M@cal@I}{\mathord}{\M@cal}{"2110}
+  \DeclareMathSymbol{\M@cal@J}{\mathord}{\M@cal}{"1D4A5}
+  \DeclareMathSymbol{\M@cal@K}{\mathord}{\M@cal}{"1D4A6}
+  \DeclareMathSymbol{\M@cal@L}{\mathord}{\M@cal}{"2112}
+  \DeclareMathSymbol{\M@cal@M}{\mathord}{\M@cal}{"2133}
+  \DeclareMathSymbol{\M@cal@N}{\mathord}{\M@cal}{"1D4A9}
+  \DeclareMathSymbol{\M@cal@O}{\mathord}{\M@cal}{"1D4AA}
+  \DeclareMathSymbol{\M@cal@P}{\mathord}{\M@cal}{"1D4AB}
+  \DeclareMathSymbol{\M@cal@Q}{\mathord}{\M@cal}{"1D4AC}
+  \DeclareMathSymbol{\M@cal@R}{\mathord}{\M@cal}{"211B}
+  \DeclareMathSymbol{\M@cal@S}{\mathord}{\M@cal}{"1D4AE}
+  \DeclareMathSymbol{\M@cal@T}{\mathord}{\M@cal}{"1D4AF}
+  \DeclareMathSymbol{\M@cal@U}{\mathord}{\M@cal}{"1D4B0}
+  \DeclareMathSymbol{\M@cal@V}{\mathord}{\M@cal}{"1D4B1}
+  \DeclareMathSymbol{\M@cal@W}{\mathord}{\M@cal}{"1D4B2}
+  \DeclareMathSymbol{\M@cal@X}{\mathord}{\M@cal}{"1D4B3}
+  \DeclareMathSymbol{\M@cal@Y}{\mathord}{\M@cal}{"1D4B4}
+  \DeclareMathSymbol{\M@cal@Z}{\mathord}{\M@cal}{"1D4B5}
+  \DeclareMathSymbol{\M@cal@a}{\mathord}{\M@cal}{"1D4B6}
+  \DeclareMathSymbol{\M@cal@b}{\mathord}{\M@cal}{"1D4B7}
+  \DeclareMathSymbol{\M@cal@c}{\mathord}{\M@cal}{"1D4B8}
+  \DeclareMathSymbol{\M@cal@d}{\mathord}{\M@cal}{"1D4B9}
+  \DeclareMathSymbol{\M@cal@e}{\mathord}{\M@cal}{"212F}
+  \DeclareMathSymbol{\M@cal@f}{\mathord}{\M@cal}{"1D4BB}
+  \DeclareMathSymbol{\M@cal@g}{\mathord}{\M@cal}{"210A}
+  \DeclareMathSymbol{\M@cal@h}{\mathord}{\M@cal}{"1D4BD}
+  \DeclareMathSymbol{\M@cal@i}{\mathord}{\M@cal}{"1D4BE}
+  \DeclareMathSymbol{\M@cal@j}{\mathord}{\M@cal}{"1D4BF}
+  \DeclareMathSymbol{\M@cal@k}{\mathord}{\M@cal}{"1D4C0}
+  \DeclareMathSymbol{\M@cal@l}{\mathord}{\M@cal}{"1D4C1}
+  \DeclareMathSymbol{\M@cal@m}{\mathord}{\M@cal}{"1D4C2}
+  \DeclareMathSymbol{\M@cal@n}{\mathord}{\M@cal}{"1D4C3}
+  \DeclareMathSymbol{\M@cal@o}{\mathord}{\M@cal}{"2134}
+  \DeclareMathSymbol{\M@cal@p}{\mathord}{\M@cal}{"1D4C5}
+  \DeclareMathSymbol{\M@cal@q}{\mathord}{\M@cal}{"1D4C6}
+  \DeclareMathSymbol{\M@cal@r}{\mathord}{\M@cal}{"1D4C7}
+  \DeclareMathSymbol{\M@cal@s}{\mathord}{\M@cal}{"1D4C8}
+  \DeclareMathSymbol{\M@cal@t}{\mathord}{\M@cal}{"1D4C9}
+  \DeclareMathSymbol{\M@cal@u}{\mathord}{\M@cal}{"1D4CA}
+  \DeclareMathSymbol{\M@cal@v}{\mathord}{\M@cal}{"1D4CB}
+  \DeclareMathSymbol{\M@cal@w}{\mathord}{\M@cal}{"1D4CC}
+  \DeclareMathSymbol{\M@cal@x}{\mathord}{\M@cal}{"1D4CD}
+  \DeclareMathSymbol{\M@cal@y}{\mathord}{\M@cal}{"1D4CE}
+  \DeclareMathSymbol{\M@cal@z}{\mathord}{\M@cal}{"1D4CF}}
+\def\M@frak@set{%
+  \edef\M@frak{M\@frakshape\the\M@count}
+  \DeclareMathSymbol{\M@frak@A}{\mathord}{\M@frak}{"1D504}
+  \DeclareMathSymbol{\M@frak@B}{\mathord}{\M@frak}{"1D505}
+  \DeclareMathSymbol{\M@frak@C}{\mathord}{\M@frak}{"212D}
+  \DeclareMathSymbol{\M@frak@D}{\mathord}{\M@frak}{"1D507}
+  \DeclareMathSymbol{\M@frak@E}{\mathord}{\M@frak}{"1D508}
+  \DeclareMathSymbol{\M@frak@F}{\mathord}{\M@frak}{"1D509}
+  \DeclareMathSymbol{\M@frak@G}{\mathord}{\M@frak}{"1D50A}
+  \DeclareMathSymbol{\M@frak@H}{\mathord}{\M@frak}{"210C}
+  \DeclareMathSymbol{\M@frak@I}{\mathord}{\M@frak}{"2111}
+  \DeclareMathSymbol{\M@frak@J}{\mathord}{\M@frak}{"1D50D}
+  \DeclareMathSymbol{\M@frak@K}{\mathord}{\M@frak}{"1D50E}
+  \DeclareMathSymbol{\M@frak@L}{\mathord}{\M@frak}{"1D50F}
+  \DeclareMathSymbol{\M@frak@M}{\mathord}{\M@frak}{"1D510}
+  \DeclareMathSymbol{\M@frak@N}{\mathord}{\M@frak}{"1D511}
+  \DeclareMathSymbol{\M@frak@O}{\mathord}{\M@frak}{"1D512}
+  \DeclareMathSymbol{\M@frak@P}{\mathord}{\M@frak}{"1D513}
+  \DeclareMathSymbol{\M@frak@Q}{\mathord}{\M@frak}{"1D514}
+  \DeclareMathSymbol{\M@frak@R}{\mathord}{\M@frak}{"212C}
+  \DeclareMathSymbol{\M@frak@S}{\mathord}{\M@frak}{"1D516}
+  \DeclareMathSymbol{\M@frak@T}{\mathord}{\M@frak}{"1D517}
+  \DeclareMathSymbol{\M@frak@U}{\mathord}{\M@frak}{"1D518}
+  \DeclareMathSymbol{\M@frak@V}{\mathord}{\M@frak}{"1D519}
+  \DeclareMathSymbol{\M@frak@W}{\mathord}{\M@frak}{"1D51A}
+  \DeclareMathSymbol{\M@frak@X}{\mathord}{\M@frak}{"1D51B}
+  \DeclareMathSymbol{\M@frak@Y}{\mathord}{\M@frak}{"1D51C}
+  \DeclareMathSymbol{\M@frak@Z}{\mathord}{\M@frak}{"2128}
+  \DeclareMathSymbol{\M@frak@a}{\mathord}{\M@frak}{"1D51E}
+  \DeclareMathSymbol{\M@frak@b}{\mathord}{\M@frak}{"1D51F}
+  \DeclareMathSymbol{\M@frak@c}{\mathord}{\M@frak}{"1D520}
+  \DeclareMathSymbol{\M@frak@d}{\mathord}{\M@frak}{"1D521}
+  \DeclareMathSymbol{\M@frak@e}{\mathord}{\M@frak}{"1D522}
+  \DeclareMathSymbol{\M@frak@f}{\mathord}{\M@frak}{"1D523}
+  \DeclareMathSymbol{\M@frak@g}{\mathord}{\M@frak}{"1D524}
+  \DeclareMathSymbol{\M@frak@h}{\mathord}{\M@frak}{"1D525}
+  \DeclareMathSymbol{\M@frak@i}{\mathord}{\M@frak}{"1D526}
+  \DeclareMathSymbol{\M@frak@j}{\mathord}{\M@frak}{"1D527}
+  \DeclareMathSymbol{\M@frak@k}{\mathord}{\M@frak}{"1D528}
+  \DeclareMathSymbol{\M@frak@l}{\mathord}{\M@frak}{"1D529}
+  \DeclareMathSymbol{\M@frak@m}{\mathord}{\M@frak}{"1D52A}
+  \DeclareMathSymbol{\M@frak@n}{\mathord}{\M@frak}{"1D52B}
+  \DeclareMathSymbol{\M@frak@o}{\mathord}{\M@frak}{"1D52C}
+  \DeclareMathSymbol{\M@frak@p}{\mathord}{\M@frak}{"1D52D}
+  \DeclareMathSymbol{\M@frak@q}{\mathord}{\M@frak}{"1D52E}
+  \DeclareMathSymbol{\M@frak@r}{\mathord}{\M@frak}{"1D52F}
+  \DeclareMathSymbol{\M@frak@s}{\mathord}{\M@frak}{"1D530}
+  \DeclareMathSymbol{\M@frak@t}{\mathord}{\M@frak}{"1D531}
+  \DeclareMathSymbol{\M@frak@u}{\mathord}{\M@frak}{"1D532}
+  \DeclareMathSymbol{\M@frak@v}{\mathord}{\M@frak}{"1D533}
+  \DeclareMathSymbol{\M@frak@w}{\mathord}{\M@frak}{"1D534}
+  \DeclareMathSymbol{\M@frak@x}{\mathord}{\M@frak}{"1D535}
+  \DeclareMathSymbol{\M@frak@y}{\mathord}{\M@frak}{"1D536}
+  \DeclareMathSymbol{\M@frak@z}{\mathord}{\M@frak}{"1D537}}
+\def\M@bcal@set{%
+  \edef\M@bcal{M\@bcalshape\the\M@count}
+  \DeclareMathSymbol{\M@bcal@A}{\mathord}{\M@bcal}{"1D4D0}
+  \DeclareMathSymbol{\M@bcal@B}{\mathord}{\M@bcal}{"1D4D1}
+  \DeclareMathSymbol{\M@bcal@C}{\mathord}{\M@bcal}{"1D4D2}
+  \DeclareMathSymbol{\M@bcal@D}{\mathord}{\M@bcal}{"1D4D3}
+  \DeclareMathSymbol{\M@bcal@E}{\mathord}{\M@bcal}{"1D4D4}
+  \DeclareMathSymbol{\M@bcal@F}{\mathord}{\M@bcal}{"1D4D5}
+  \DeclareMathSymbol{\M@bcal@G}{\mathord}{\M@bcal}{"1D4D6}
+  \DeclareMathSymbol{\M@bcal@H}{\mathord}{\M@bcal}{"1D4D7}
+  \DeclareMathSymbol{\M@bcal@I}{\mathord}{\M@bcal}{"1D4D8}
+  \DeclareMathSymbol{\M@bcal@J}{\mathord}{\M@bcal}{"1D4D9}
+  \DeclareMathSymbol{\M@bcal@K}{\mathord}{\M@bcal}{"1D4DA}
+  \DeclareMathSymbol{\M@bcal@L}{\mathord}{\M@bcal}{"1D4DB}
+  \DeclareMathSymbol{\M@bcal@M}{\mathord}{\M@bcal}{"1D4DC}
+  \DeclareMathSymbol{\M@bcal@N}{\mathord}{\M@bcal}{"1D4DD}
+  \DeclareMathSymbol{\M@bcal@O}{\mathord}{\M@bcal}{"1D4DE}
+  \DeclareMathSymbol{\M@bcal@P}{\mathord}{\M@bcal}{"1D4DF}
+  \DeclareMathSymbol{\M@bcal@Q}{\mathord}{\M@bcal}{"1D4E0}
+  \DeclareMathSymbol{\M@bcal@R}{\mathord}{\M@bcal}{"1D4E1}
+  \DeclareMathSymbol{\M@bcal@S}{\mathord}{\M@bcal}{"1D4E2}
+  \DeclareMathSymbol{\M@bcal@T}{\mathord}{\M@bcal}{"1D4E3}
+  \DeclareMathSymbol{\M@bcal@U}{\mathord}{\M@bcal}{"1D4E4}
+  \DeclareMathSymbol{\M@bcal@V}{\mathord}{\M@bcal}{"1D4E5}
+  \DeclareMathSymbol{\M@bcal@W}{\mathord}{\M@bcal}{"1D4E6}
+  \DeclareMathSymbol{\M@bcal@X}{\mathord}{\M@bcal}{"1D4E7}
+  \DeclareMathSymbol{\M@bcal@Y}{\mathord}{\M@bcal}{"1D4E8}
+  \DeclareMathSymbol{\M@bcal@Z}{\mathord}{\M@bcal}{"1D4E9}
+  \DeclareMathSymbol{\M@bcal@a}{\mathord}{\M@bcal}{"1D4EA}
+  \DeclareMathSymbol{\M@bcal@b}{\mathord}{\M@bcal}{"1D4EB}
+  \DeclareMathSymbol{\M@bcal@c}{\mathord}{\M@bcal}{"1D4EC}
+  \DeclareMathSymbol{\M@bcal@d}{\mathord}{\M@bcal}{"1D4ED}
+  \DeclareMathSymbol{\M@bcal@e}{\mathord}{\M@bcal}{"1D4EE}
+  \DeclareMathSymbol{\M@bcal@f}{\mathord}{\M@bcal}{"1D4EF}
+  \DeclareMathSymbol{\M@bcal@g}{\mathord}{\M@bcal}{"1D4F0}
+  \DeclareMathSymbol{\M@bcal@h}{\mathord}{\M@bcal}{"1D4F1}
+  \DeclareMathSymbol{\M@bcal@i}{\mathord}{\M@bcal}{"1D4F2}
+  \DeclareMathSymbol{\M@bcal@j}{\mathord}{\M@bcal}{"1D4F3}
+  \DeclareMathSymbol{\M@bcal@k}{\mathord}{\M@bcal}{"1D4F4}
+  \DeclareMathSymbol{\M@bcal@l}{\mathord}{\M@bcal}{"1D4F5}
+  \DeclareMathSymbol{\M@bcal@m}{\mathord}{\M@bcal}{"1D4F6}
+  \DeclareMathSymbol{\M@bcal@n}{\mathord}{\M@bcal}{"1D4F7}
+  \DeclareMathSymbol{\M@bcal@o}{\mathord}{\M@bcal}{"1D4F8}
+  \DeclareMathSymbol{\M@bcal@p}{\mathord}{\M@bcal}{"1D4F9}
+  \DeclareMathSymbol{\M@bcal@q}{\mathord}{\M@bcal}{"1D4FA}
+  \DeclareMathSymbol{\M@bcal@r}{\mathord}{\M@bcal}{"1D4FB}
+  \DeclareMathSymbol{\M@bcal@s}{\mathord}{\M@bcal}{"1D4FC}
+  \DeclareMathSymbol{\M@bcal@t}{\mathord}{\M@bcal}{"1D4FD}
+  \DeclareMathSymbol{\M@bcal@u}{\mathord}{\M@bcal}{"1D4FE}
+  \DeclareMathSymbol{\M@bcal@v}{\mathord}{\M@bcal}{"1D4FF}
+  \DeclareMathSymbol{\M@bcal@w}{\mathord}{\M@bcal}{"1D500}
+  \DeclareMathSymbol{\M@bcal@x}{\mathord}{\M@bcal}{"1D501}
+  \DeclareMathSymbol{\M@bcal@y}{\mathord}{\M@bcal}{"1D502}
+  \DeclareMathSymbol{\M@bcal@z}{\mathord}{\M@bcal}{"1D503}}
+\def\M@bfrak@set{%
+  \edef\M@bfrak{M\@bfrakshape\the\M@count}
+  \DeclareMathSymbol{\M@bfrak@A}{\mathord}{\M@bfrak}{"1D56C}
+  \DeclareMathSymbol{\M@bfrak@B}{\mathord}{\M@bfrak}{"1D56D}
+  \DeclareMathSymbol{\M@bfrak@C}{\mathord}{\M@bfrak}{"1D56E}
+  \DeclareMathSymbol{\M@bfrak@D}{\mathord}{\M@bfrak}{"1D56F}
+  \DeclareMathSymbol{\M@bfrak@E}{\mathord}{\M@bfrak}{"1D570}
+  \DeclareMathSymbol{\M@bfrak@F}{\mathord}{\M@bfrak}{"1D571}
+  \DeclareMathSymbol{\M@bfrak@G}{\mathord}{\M@bfrak}{"1D572}
+  \DeclareMathSymbol{\M@bfrak@H}{\mathord}{\M@bfrak}{"1D573}
+  \DeclareMathSymbol{\M@bfrak@I}{\mathord}{\M@bfrak}{"1D574}
+  \DeclareMathSymbol{\M@bfrak@J}{\mathord}{\M@bfrak}{"1D575}
+  \DeclareMathSymbol{\M@bfrak@K}{\mathord}{\M@bfrak}{"1D576}
+  \DeclareMathSymbol{\M@bfrak@L}{\mathord}{\M@bfrak}{"1D577}
+  \DeclareMathSymbol{\M@bfrak@M}{\mathord}{\M@bfrak}{"1D578}
+  \DeclareMathSymbol{\M@bfrak@N}{\mathord}{\M@bfrak}{"1D579}
+  \DeclareMathSymbol{\M@bfrak@O}{\mathord}{\M@bfrak}{"1D57A}
+  \DeclareMathSymbol{\M@bfrak@P}{\mathord}{\M@bfrak}{"1D57B}
+  \DeclareMathSymbol{\M@bfrak@Q}{\mathord}{\M@bfrak}{"1D57C}
+  \DeclareMathSymbol{\M@bfrak@R}{\mathord}{\M@bfrak}{"1D57D}
+  \DeclareMathSymbol{\M@bfrak@S}{\mathord}{\M@bfrak}{"1D57E}
+  \DeclareMathSymbol{\M@bfrak@T}{\mathord}{\M@bfrak}{"1D57F}
+  \DeclareMathSymbol{\M@bfrak@U}{\mathord}{\M@bfrak}{"1D580}
+  \DeclareMathSymbol{\M@bfrak@V}{\mathord}{\M@bfrak}{"1D581}
+  \DeclareMathSymbol{\M@bfrak@W}{\mathord}{\M@bfrak}{"1D582}
+  \DeclareMathSymbol{\M@bfrak@X}{\mathord}{\M@bfrak}{"1D583}
+  \DeclareMathSymbol{\M@bfrak@Y}{\mathord}{\M@bfrak}{"1D584}
+  \DeclareMathSymbol{\M@bfrak@Z}{\mathord}{\M@bfrak}{"1D585}
+  \DeclareMathSymbol{\M@bfrak@a}{\mathord}{\M@bfrak}{"1D586}
+  \DeclareMathSymbol{\M@bfrak@b}{\mathord}{\M@bfrak}{"1D587}
+  \DeclareMathSymbol{\M@bfrak@c}{\mathord}{\M@bfrak}{"1D588}
+  \DeclareMathSymbol{\M@bfrak@d}{\mathord}{\M@bfrak}{"1D589}
+  \DeclareMathSymbol{\M@bfrak@e}{\mathord}{\M@bfrak}{"1D58A}
+  \DeclareMathSymbol{\M@bfrak@f}{\mathord}{\M@bfrak}{"1D58B}
+  \DeclareMathSymbol{\M@bfrak@g}{\mathord}{\M@bfrak}{"1D58C}
+  \DeclareMathSymbol{\M@bfrak@h}{\mathord}{\M@bfrak}{"1D58D}
+  \DeclareMathSymbol{\M@bfrak@i}{\mathord}{\M@bfrak}{"1D58E}
+  \DeclareMathSymbol{\M@bfrak@j}{\mathord}{\M@bfrak}{"1D58F}
+  \DeclareMathSymbol{\M@bfrak@k}{\mathord}{\M@bfrak}{"1D590}
+  \DeclareMathSymbol{\M@bfrak@l}{\mathord}{\M@bfrak}{"1D591}
+  \DeclareMathSymbol{\M@bfrak@m}{\mathord}{\M@bfrak}{"1D592}
+  \DeclareMathSymbol{\M@bfrak@n}{\mathord}{\M@bfrak}{"1D593}
+  \DeclareMathSymbol{\M@bfrak@o}{\mathord}{\M@bfrak}{"1D594}
+  \DeclareMathSymbol{\M@bfrak@p}{\mathord}{\M@bfrak}{"1D595}
+  \DeclareMathSymbol{\M@bfrak@q}{\mathord}{\M@bfrak}{"1D596}
+  \DeclareMathSymbol{\M@bfrak@r}{\mathord}{\M@bfrak}{"1D597}
+  \DeclareMathSymbol{\M@bfrak@s}{\mathord}{\M@bfrak}{"1D598}
+  \DeclareMathSymbol{\M@bfrak@t}{\mathord}{\M@bfrak}{"1D599}
+  \DeclareMathSymbol{\M@bfrak@u}{\mathord}{\M@bfrak}{"1D59A}
+  \DeclareMathSymbol{\M@bfrak@v}{\mathord}{\M@bfrak}{"1D59B}
+  \DeclareMathSymbol{\M@bfrak@w}{\mathord}{\M@bfrak}{"1D59C}
+  \DeclareMathSymbol{\M@bfrak@x}{\mathord}{\M@bfrak}{"1D59D}
+  \DeclareMathSymbol{\M@bfrak@y}{\mathord}{\M@bfrak}{"1D59E}
+  \DeclareMathSymbol{\M@bfrak@z}{\mathord}{\M@bfrak}{"1D59F}}
+\endinput
+%%
+%% End of file `mathfont.sty'.

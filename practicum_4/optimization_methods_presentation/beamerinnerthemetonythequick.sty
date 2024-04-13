@@ -1,0 +1,54 @@
+\mode<presentation>
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  %%\fill[color=brown] (2.05,2) rectangle (\the\paperwidth,\the\paperheight);
+  %\node[inner sep=0pt] at (8.25,5.85) {\includegraphics[width=1.15\textwidth]{images/background2.png}};
+
+  \fill[color=greenttq] (0,0) rectangle(1.95,1.9);
+  \fill[color=greenttq!80] (0,2) rectangle(1.95,\the\paperheight);
+  \fill[color=greenttq!80] (2.05,0) rectangle(\the\paperwidth,1.9);
+  \ifnum\thepage>1\relax%
+   \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+   \fi
+  \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{tonythequick}[1][]
+{ 
+    \vskip0.5cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=2.3cm,sep=5pt,#1]{title page header}
+      \usebeamerfont{title}\inserttitle\par%
+    \end{beamercolorbox}%
+
+    \begin{beamercolorbox}[wd=12cm,leftskip=2.3cm,sep=5pt,#1]{title page header}
+      \rule{0.85\textwidth}{0.4pt}
+    \end{beamercolorbox}%
+
+    \begin{beamercolorbox}[wd=12cm,leftskip=2.3cm,sep=5pt,#1]{author}
+      \usebeamerfont{author}\insertauthor%
+    \end{beamercolorbox}
+
+    \begin{beamercolorbox}[wd=12cm,leftskip=2.3cm,sep=5pt,#1]{author}
+      \usebeamerfont{institute}\insertinstitute\par%
+    \end{beamercolorbox}
+
+    \vskip1.7cm%
+
+    \begin{beamercolorbox}[wd=12cm,leftskip=2.3cm,sep=5pt,#1]{subtitle page header}
+      \usebeamerfont{subtitle}\insertsubtitle\par%
+    \end{beamercolorbox}%
+
+    %\vskip6cm%
+
+    \vskip0.8cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=2.3cm,sep=5pt,#1]{date}
+      \usebeamerfont{date}\insertdate%
+    \end{beamercolorbox}
+  \vfill
+}
+
+\mode
+<all>

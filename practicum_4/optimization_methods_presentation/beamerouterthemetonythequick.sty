@@ -1,0 +1,64 @@
+\mode<presentation>
+
+% Frame title
+\defbeamertemplate*{frametitle}{tonythequick}[1][]
+{
+%%\vskip0cm%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.07cm]{frametitle} 
+  \begin{tikzpicture}
+  \useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,1.2);
+  \fill[color=greenttq] (0,0) rectangle(1.2,1.2);
+  %\fill[orange] (0,0) rectangle(2.95,1.2);
+  \fill[greenttq!80] (1.3,0) rectangle(\the\paperwidth,1.2);
+   \ifx\insertframesubtitle\@empty%
+      {\node[anchor=west, white,font=\Large] at (1.5,0.55){\insertframetitle};}
+      \else%
+      {\node[anchor= west, white,font=\Large] at (2.0,0.95){\insertframetitle};%
+       \node[anchor= west, white,font=\small] at (2.0,0.38){\insertframesubtitle};}%
+      \fi
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+% Section slide
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title page header}
+    \Large\usebeamerfont{title page header}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+% Footer
+\defbeamertemplate*{footline}{tonythequick}
+{
+  \ifnum \insertpagenumber=1
+    \leavevmode%
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+      % empty environment to raise height
+    \end{beamercolorbox}}%
+    \vskip0pt%
+  \else
+    \leavevmode%
+    \hbox{%
+    %%\fontsize{9}{13}\selectfont
+     \fontseries{m}\selectfont % see this for options: https://tex.stackexchange.com/questions/68745/possible-values-for-fontseries-and-fontshape
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+      %\usebeamerfont{author in head/foot}\insertsection
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      %\usebeamerfont{title in head/foot}\insertsubsection
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \usebeamerfont{date in head/foot}%\insertshortdate{}\hspace*{2em}
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+    \end{beamercolorbox}}%
+    \vskip0pt%
+  \fi
+}
+
+\mode<all>
