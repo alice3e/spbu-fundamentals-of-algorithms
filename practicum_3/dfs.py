@@ -63,7 +63,7 @@ def dfs_recursive_postorder(G: nx.DiGraph, node_name: Any, visited: dict[Any]) -
 if __name__ == "__main__":
     # Load and plot the graph
     # G = nx.erdos_renyi_graph(n=15, p=0.2)  # кол-во узлов, вероятность появления связи
-    G = nx.read_edgelist("graph_2.edgelist", create_using=nx.Graph)
+    G = nx.read_edgelist("practicum_3/graph_2.edgelist", create_using=nx.Graph)
     plot_graph(G)
 
     # 1. Recursive DFS. Trivial to implement, but it does not scale on large graphs
