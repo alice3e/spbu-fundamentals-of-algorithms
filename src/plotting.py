@@ -8,7 +8,7 @@ from numpy.typing import NDArray
 
 
 def plot_graph(
-    G: Union[nx.Graph, nx.DiGraph], highlighted_edges: list[tuple[Any, Any]] = None, highlighted_nodes: list[tuple[Any]] = None
+        G: Union[nx.Graph, nx.DiGraph], highlighted_edges: list[tuple[Any, Any]] = None, highlighted_nodes: list[tuple[Any]] = None
 ) -> None:
     fig, ax = plt.subplots(figsize=(12, 6))
     pos = nx.shell_layout(G)

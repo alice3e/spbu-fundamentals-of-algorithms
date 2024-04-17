@@ -55,6 +55,7 @@ if __name__ == "__main__":
         nodes_to_highlight = []
         edges_to_highlight = []
         plot_graph(G)
+        # will run only 1 time, assuming Connectivity component = 1
         flag_cycles = has_cycles(G, get_keys(visited, False), visited=visited, node_highlight=nodes_to_highlight,
                                  edge_highlight=edges_to_highlight)
         if (flag_cycles):
