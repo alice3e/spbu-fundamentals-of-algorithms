@@ -20,35 +20,46 @@ def bfs(G: nx.Graph, start_node: Any, end_node: Any):
     min_flow = Inf
     path = []
     current_node = end_node
+    if(dist[end_node] == Inf): return ([-1],[-1])
     for i in range(dist[end_node]):
         path.append(current_node)
         min_flow = min(min_flow, G.get_edge_data(parent[current_node],current_node)['weight'])
         current_node = parent[current_node]
     path.append(start_node)
     path = path[::-1]
-    return zip(min_flow,path)
+    return ([min_flow],path)
+
+def weight_change(G: nx.Graph, start_node: Any , end_node:Any, path: list, min_flow: int) -> None:
+    edge_higlight = []
+    print(path,min_flow)
+    for i in range(len(path) - 1):
+        start = path[i]
+        end = path[i+1]
+        G[start][end]['weight'] -= min_flow
+        if(G[start][end]['weight'] == 0): G.remove_edge((start),(end))
+        G.add_edge(end,start,weight=min_flow)
+        edge_higlight.append((start,end))
+    plotting.plot_graph(G,highlighted_edges=edge_higlight)
 
 # Алгоритм Эдмондса — Карпа
-def max_flow(G: nx.Graph, s: Any, t: Any) -> int:
+def max_flow(G: nx.Graph, s: Any, e: Any) -> int:
     value: int = 0
-    #print(neighbours, G.get_edge_data(current_node,neighbours)['weight'])
-    # weight - макс пропуск способ
-    # ДЗ найти еще более сложные графы и поиграть с ними
-    ##########################
-    ### PUT YOUR CODE HERE ###
-    ##########################
-
+    cur_flow, path = bfs(G,s,e)
+    cur_flow = cur_flow[0]
+    while(cur_flow >= 0):
+        value += cur_flow
+        print(f'cur_flow = {cur_flow} , path - {path}, value = {value}')
+        weight_change(G,s,e,path,cur_flow)
+        cur_flow, path = bfs(G,s,e)
+        cur_flow = cur_flow[0]
     return value
 
 
 if __name__ == "__main__":
     # Load the graph
     G = nx.read_edgelist("practicum_3/homework/advanced/graph_1.edgelist", create_using=nx.DiGraph)
+    G.add_node('10')
     
-    print(bfs(G,'0','5'))
-    
-    
-    plotting.plot_graph(G)
-    #val = max_flow(G, s=0, t=5)
-    #print(f"Maximum flow is {val}. Should be 23")
+    val = max_flow(G, s='0', e='5')
+    print(f"Maximum flow is {val}. Should be 23")
 #typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
