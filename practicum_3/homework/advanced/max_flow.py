@@ -3,7 +3,9 @@ from src import plotting
 import networkx as nx
 from numpy import Inf
 
-def bfs(G: nx.Graph, start_node: Any, end_node: Any):
+
+# В остаточной сети находим кратчайший путь из источника в сток.
+def bfs(G: nx.Graph, start_node: Any, end_node: Any): 
     dist = {i:Inf for i in G.nodes}
     parent = {i:None for i in G.nodes}
     queue = []
@@ -29,6 +31,7 @@ def bfs(G: nx.Graph, start_node: Any, end_node: Any):
     path = path[::-1]
     return ([min_flow],path)
 
+# Пускаем через найденный путь (он называется увеличивающим путём или увеличивающей цепью) максимально возможный поток: 
 def weight_change(G: nx.Graph, start_node: Any , end_node:Any, path: list, min_flow: int) -> None:
     edge_higlight = []
     print(path,min_flow)
@@ -46,7 +49,7 @@ def max_flow(G: nx.Graph, s: Any, e: Any) -> int:
     value: int = 0
     cur_flow, path = bfs(G,s,e)
     cur_flow = cur_flow[0]
-    while(cur_flow >= 0):
+    while(cur_flow >= 0): #В остаточной сети находим кратчайший путь из источника в сток. Если такого пути нет, останавливаемся.
         value += cur_flow
         print(f'cur_flow = {cur_flow} , path - {path}, value = {value}')
         weight_change(G,s,e,path,cur_flow)
@@ -57,9 +60,6 @@ def max_flow(G: nx.Graph, s: Any, e: Any) -> int:
 
 if __name__ == "__main__":
     # Load the graph
-    G = nx.read_edgelist("practicum_3/homework/advanced/graph_1.edgelist", create_using=nx.DiGraph)
-    G.add_node('10')
-    
+    G = nx.read_edgelist("practicum_3/homework/advanced/graph_2.edgelist", create_using=nx.DiGraph)
     val = max_flow(G, s='0', e='5')
     print(f"Maximum flow is {val}. Should be 23")
-#typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet

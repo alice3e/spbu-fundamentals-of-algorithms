@@ -1,0 +1,9 @@
+#/Users/alicee/Desktop/конспекты/Algos_2/spbu-fundamentals-of-algorithms/practicum_3/homework/advanced/max_flow.py
+# GMT Wed Apr 17 21:09:14 2024
+# 
+0 1 2
+1 2 3
+2 1 4
+3 2 5
+4 3 5
+5
