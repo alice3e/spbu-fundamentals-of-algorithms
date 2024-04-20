@@ -145,6 +145,31 @@
 \end{algorithmic}
 \end{frame}
 
+\begin{frame}{Имитация отжига (Simulated Annealing)}
+    \small
+
+    Имитация отжига -- стохастический итерационный алгоритм глобального поиска.
+
+    
+\begin{algorithmic}[1]
+\State $t \gets $ temperature
+\State $S \gets $ some initial candidate solution
+\State $\xi \gets $ random value generator yielding a random value from 0 to 1 each time it is accessed
+\State $Best \gets S$
+\Repeat
+    \State $R \gets \text{Tweak}(\text{Copy}(S))$
+    \If{\text{Quality}($R$) > \text{Quality}($S$) or $\xi < \exp[\frac{\text{Quality}(R) - \text{Quality}(S)}{t}]$}
+        \State $S \gets R$
+    \EndIf
+    \State{Decrease $t$}
+    \If{\text{Quality}($S$) > \text{Quality}($Best$)}
+        \State $Best \gets S$
+    \EndIf
+\Until{$Best$ is the ideal solution or we have run out of time or $t \leq 0$}\\
+\Return $Best$
+\end{algorithmic}
+\end{frame}
+
 \begin{frame}{Раскраска графов}
     \small
 
@@ -161,6 +186,39 @@
 
     Зачастую количество цветов меньше хроматического числа, что требует поиска решения, минимизирующего количество конфликтов, то есть количество ребер с узлами одинаковых цветов.
     Кроме того, раскраска графов в общем случае является NP-сложной задачей.
+\end{frame}
+
+\begin{frame}{Разбиение графов}
+    \small
+
+    \begin{minipage}{0.49\textwidth}
+        Разбиение графа $G = (V, E)$ в $k$ компонент предполагает такое разбиение $V = \bigcap_i V_i$, что сумма весов ребер, разделяющих компоненты, минимальна.
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=1.0\textwidth]{images/graph_partitioning.png}
+            \caption{Разбиение графа по 3 компонентам.}
+        \end{figure}
+    \end{minipage}
+
+    Эта задача находится множество применений: проектирование топологий сетей, балансировка награзки в вычислительных системах, задачи теории расписаний и так далее.
+    Разбиение графов в общем случае является NP-сложной задачей.
+\end{frame}
+
+\begin{frame}{Спектральная кластеризация}
+    \small
+
+    Одним из способов решения задачи разбиения графа является спектральная кластеризация:
+
+    \begin{enumerate}
+        \item Построить матрицу смежности $\bm{A}$
+        \item Построить диагональную матрицу $\bm{D}$, где $D_{ii} = \sum_j A_{ij}$
+        \item Найти лапласиан графа: $\bm{L} = \bm{D} - \bm{A}$
+        \item Найти разложение $\bm{L}$ на собственные числа и собственные вектора
+        \item Первый собственный вектор (предполагается сортировка от наименьшего собственного числа к наибольшему) содержит информацию о компонентах связности
+        \item Остальные вектора по порядку можно использовать как признаки для кластеризации (например, с помощью k-means) 
+    \end{enumerate}
 \end{frame}
 
 \end{document}

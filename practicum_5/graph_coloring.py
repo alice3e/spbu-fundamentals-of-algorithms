@@ -1,14 +1,10 @@
 from typing import Protocol
 
 import numpy as np
-from numpy.typing import NDArray
-import matplotlib.pyplot as plt
 import networkx as nx
 
-from src.plotting import plot_graph
-
-
-NDArrayInt = NDArray[np.int_]
+from src.common import NDArrayInt
+from src.plotting import plot_graph, plot_loss_history
 
 
 class GraphColoringSolver(Protocol):
@@ -33,6 +29,7 @@ def set_colors(G, colors):
 
 
 def tweak(colors, n_max_colors):
+
     ##########################
     ### PUT YOUR CODE HERE ###
     ##########################
@@ -42,7 +39,8 @@ def tweak(colors, n_max_colors):
 
 def solve_via_hill_climbing(
     G: nx.Graph, n_max_colors: int, initial_colors: NDArrayInt, n_iters: int
-) -> NDArrayInt:
+):
+
     ##########################
     ### PUT YOUR CODE HERE ###
     ##########################
@@ -52,7 +50,8 @@ def solve_via_hill_climbing(
 
 def solve_via_random_search(
     G: nx.Graph, n_max_colors: int, initial_colors: NDArrayInt, n_iters: int
-) -> NDArrayInt:
+):
+
     ##########################
     ### PUT YOUR CODE HERE ###
     ##########################
@@ -68,25 +67,12 @@ def solve_with_restarts(
     n_iters: int,
     n_restarts: int,
 ) -> NDArrayInt:
+
     ##########################
     ### PUT YOUR CODE HERE ###
     ##########################
 
     pass
-
-
-def plot_loss_history(loss_history: NDArrayInt) -> None:
-    fig, ax = plt.subplots(1, 1, figsize=(12, 6))
-    if loss_history.ndim == 1:
-        loss_history = loss_history.reshape(1, -1)
-    n_restarts, n_iters = loss_history.shape
-    for i in range(n_restarts):
-        ax.plot(range(n_iters), loss_history[i, :])
-    ax.set_xlabel("# iterations")
-    ax.set_ylabel("# conflicts")
-    ax.grid()
-    fig.tight_layout()
-    plt.show()
 
 
 if __name__ == "__main__":
