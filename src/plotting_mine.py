@@ -6,23 +6,26 @@ from networkx.drawing.nx_pydot import graphviz_layout
 import numpy as np
 from numpy.typing import NDArray
 
-from src.common import NDArrayInt
-
 
 def plot_graph(
-    G: Union[nx.Graph, nx.DiGraph], highlighted_edges: list[tuple[Any, Any]] = None
+        G: Union[nx.Graph, nx.DiGraph], highlighted_edges: list[tuple[Any, Any]] = None, highlighted_nodes: list[tuple[Any]] = None
 ) -> None:
     fig, ax = plt.subplots(figsize=(12, 6))
-    pos = nx.spring_layout(G)
+    pos = nx.shell_layout(G)
     edge_color_list = ["black"] * len(G.edges)
+    node_color_list = ["white"] * len(G.nodes)
     if highlighted_edges:
         for i, edge in enumerate(G.edges()):
             if edge in highlighted_edges or (edge[1], edge[0]) in highlighted_edges:
                 edge_color_list[i] = "red"
+
+    if highlighted_nodes:
+        for i in highlighted_nodes:
+            node_color_list[ list(G.nodes()).index(i) ] = "red"
     options = dict(
         font_size=12,
         node_size=500,
-        node_color="white",
+        node_color=node_color_list,
         edgecolors="black",
         edge_color=edge_color_list,
     )
@@ -54,22 +57,6 @@ def plot_points(points: NDArray, convex_hull: NDArray = None, **kwargs) -> None:
             (convex_hull, convex_hull[0, :].reshape(1, -1)), axis=0
         )
         ax.plot(convex_hull[:, 0], convex_hull[:, 1], "-", linewidth=4, zorder=-10)
-    ax.grid()
-    fig.tight_layout()
-    plt.show()
-
-
-def plot_loss_history(
-    loss_history: NDArrayInt, xlabel="# iterations", ylabel="# conflicts"
-) -> None:
-    fig, ax = plt.subplots(1, 1, figsize=(12, 6))
-    if loss_history.ndim == 1:
-        loss_history = loss_history.reshape(1, -1)
-    n_restarts, n_iters = loss_history.shape
-    for i in range(n_restarts):
-        ax.plot(range(n_iters), loss_history[i, :])
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
     ax.grid()
     fig.tight_layout()
     plt.show()
