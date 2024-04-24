@@ -38,9 +38,7 @@ def tweak(colors, n_max_colors):
     return new_colors
 
 
-def solve_via_hill_climbing(
-    G: nx.Graph, n_max_colors: int, initial_colors: NDArrayInt, n_iters: int
-):
+def solve_via_hill_climbing (G: nx.Graph, n_max_colors: int, initial_colors: NDArrayInt, n_iters: int):
     loss_history = np.zeros((n_iters,), dtype=np.int_)
     n_tweaks = 10
     cur_colors = initial_colors
