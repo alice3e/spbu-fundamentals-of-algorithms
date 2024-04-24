@@ -14,6 +14,29 @@ Go to `Run and Debug` in the left panel, create a new launch file, select `Pytho
 }
 ```
 
+
+### MacOs (homebrew or python.app)
+Go to `Terminal.app` and paste this command:
+```bash
+export PYTHONPATH=/Users/path_to_your_github_clone_directory:$PYTHONPATH
+```
+### MacOs (anaconda3 or miniconda)
+Go to `Terminal.app` and paste this command:
+```bash
+conda develop /Users/path_to_your_github_clone_directory
+```
+Then you can check you PYTHONPATH with this command
+```bash
+python -c "import sys; print('\n'.join(sys.path))"
+```
+*Note: python inside your console and inside your PyCharm/Jupyter/DataSpell may be different so run commands in terminal of this app*
+
+Another way to check your PYTHONPATH (most accurate)
+paste this code (first line) in some .py file (for example: dfs.py (practicum_2) )and run the file
+```python
+print(sys.path) # you should see /Users/path_to_your_github_clone_directory
+```
+
 ## Practicum 1
 
 Изучение `python`, `numpy` и  `matplotlib`, необходимых для дальнейшей работы. Предполагается, что студент имеет базовые знания python.
