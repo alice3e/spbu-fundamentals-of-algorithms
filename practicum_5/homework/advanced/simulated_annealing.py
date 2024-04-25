@@ -3,8 +3,6 @@ from numpy.typing import NDArray
 import networkx as nx
 
 from src.plotting import plot_graph, plot_loss_history
-
-
 NDArrayInt = NDArray[np.int_]
 
 
@@ -33,18 +31,29 @@ def tweak(colors, n_max_colors):
         
     return new_colors
 
+def change(iteration_number):
+    change = 1 / ( np.log(iteration_number + 195) * 0.1896 )
+    return change
+
 
 def temp_drop(current_temp,min_temp,max_temp,iteration_number) -> float:
-    current_temp = current_temp * 0.5
+    current_temp = current_temp * change(iteration_number)
     if(current_temp <= min_temp):
         current_temp = 0
     return current_temp
 
+def probability(current_temp,delta_conflicts):
+    probability_of_transition = 0
+    if(current_temp != 0):
+        power_of_e = (abs(delta_conflicts)/current_temp) # start = 0 end = inf
+        probability_of_transition = np.exp(-1*power_of_e)
+    return probability_of_transition
+
 def solve_via_simulated_annealing (G: nx.Graph, n_max_colors: int, initial_colors: NDArrayInt, n_iters: int):
     current_iteration = 0
-    loss_history = np.zeros((n_iters,), dtype=np.int_)
-    MIN_TEMP = 0.000001
-    MAX_TEMP = 10
+    loss_history = np.zeros((n_iters,), dtype=np.float64)
+    MIN_TEMP = 0.0000001
+    MAX_TEMP = 500
     current_temp = MAX_TEMP
     cur_colors = initial_colors
     
@@ -52,22 +61,22 @@ def solve_via_simulated_annealing (G: nx.Graph, n_max_colors: int, initial_color
         next_colors = initial_colors.copy()
         next_colors = tweak(next_colors, n_max_colors)
         delta_conflicts = number_of_conflicts(G,cur_colors) - number_of_conflicts(G,next_colors)
-        #print(f'Было - {number_of_conflicts(G,cur_colors)}, Стало - {number_of_conflicts(G,next_colors)}')
+
         if(delta_conflicts > 0):
             cur_colors = next_colors
         else:
             if(current_temp > MIN_TEMP):
-                probability_of_transition = np.exp(-(delta_conflicts/current_temp))
+                probability_of_transition = probability(current_temp=current_temp,delta_conflicts=delta_conflicts)
                 value = np.random.rand()
                 if(value <= probability_of_transition):
-                    print("JUUUMP!")
+                    print(f'JUUUMP!, probability = {probability_of_transition}')
                     cur_colors = next_colors
         
         current_temp = temp_drop(current_temp,MIN_TEMP,MAX_TEMP,current_iteration)
         loss_history[current_iteration] = number_of_conflicts(G,cur_colors)
         current_iteration += 1
         print(f'---\n iteration_number = {current_iteration}, temp = {current_temp}, conflicts={number_of_conflicts(G,cur_colors)}, delta=  {delta_conflicts}\n---')
-    
+        
     
     
     return loss_history
@@ -83,6 +92,9 @@ if __name__ == "__main__":
     n_max_colors = 3
     initial_colors = np.random.randint(low=0, high=n_max_colors - 1, size=len(G.nodes))
 
+
+    probabilty_history = np.zeros((n_max_iters,), dtype=np.float64)
+    
     loss_history = solve_via_simulated_annealing(
         G, n_max_colors, initial_colors, n_max_iters
     )
