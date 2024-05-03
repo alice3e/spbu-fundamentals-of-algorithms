@@ -14,7 +14,6 @@ Go to `Run and Debug` in the left panel, create a new launch file, select `Pytho
 }
 ```
 
-
 ### MacOs (homebrew or python.app)
 Go to `Terminal.app` and paste this command:
 ```bash
@@ -23,6 +22,7 @@ export PYTHONPATH=/Users/path_to_your_github_clone_directory:$PYTHONPATH
 ### MacOs (anaconda3 or miniconda)
 Go to `Terminal.app` and paste this command:
 ```bash
+conda install conda-build
 conda develop /Users/path_to_your_github_clone_directory
 ```
 Then you can check you PYTHONPATH with this command
@@ -32,11 +32,10 @@ python -c "import sys; print('\n'.join(sys.path))"
 *Note: python inside your console and inside your PyCharm/Jupyter/DataSpell may be different so run commands in terminal of this app*
 
 Another way to check your PYTHONPATH (most accurate)
-paste this code (first line) in some .py file (for example: dfs.py (practicum_2) )and run the file
+paste this code (first line) in some .py file (for example: practicum_2/dfs.py ) and run the file
 ```python
 print(sys.path) # you should see /Users/path_to_your_github_clone_directory
 ```
-
 ## Practicum 1
 
 Изучение `python`, `numpy` и  `matplotlib`, необходимых для дальнейшей работы. Предполагается, что студент имеет базовые знания python.
@@ -92,8 +91,8 @@ print(sys.path) # you should see /Users/path_to_your_github_clone_directory
 
 План:
 1. Изучить постановку задачи раскраски графов.
-2. Изучить алгоритм Hill Climbing
-3. Реализовать случайный поиск и Hill Climbing в файле `practicum_5/graph_coloring.py`
+2. Изучить алгоритм Hill Climbing.
+3. Реализовать случайный поиск и Hill Climbing в файле `practicum_5/graph_coloring.py`.
 
 Домашнее задание (базовый вариант):
 1. Обход бинарного дерева зигзагом: `practicum_5/homework/basic/binary_tree_zigzag_level_order_traversal.py`. Необходимо реализовать функцию `build_tree`, строящую дерево `BinaryTree` из списка, где узлы перечислены по слоям слева направо (см. [пример](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal)). Далее необходимо реализовать метод `BinaryTree.zigzag_level_order_traversal`, выполняющий обход зигзагом и возвращающий двумерный список, где первая размерность соответствует глубине дерева, а вторая - узлам на этой глубине. Под зигзагом подразумевается обход слева направо на нулевом уровне (корень), затем справа налево на первом уровне и так далее.
@@ -102,3 +101,55 @@ print(sys.path) # you should see /Users/path_to_your_github_clone_directory
 1. Раскраска графа с помощью имитации отжига: `practicum_5/homework/advanced/simulated_annealing.py`. Имитация отжига требует реализации двух объектов: оператора генерации новой точки (tweak) и расписания понижения температуры. Оба объекта реализуются по вашему усмотрению. Цель состоит в нахождении наилучшего решения (с точки зрения ожидаемой скорости сходимости к наименьшему количеству конфликтов) для произвольных графов Эрдеша-Реньи со 100 узлами и $p \ll 1$.
 
 Дедлайн: 2024.04.27
+
+## Practicum 6
+
+Разбор проблем вычислительной неустойчивости. Изучение прямых методов решения СЛАУ (метод Гаусса, LU-разложение, разложение Холецкого).
+
+План:
+1. Изучить примеры вычислительной неустойчивости для вычисления корней квадртичного уравнения и значений полинома.
+2. Реализовать устойчивые схемы вычислений в файле `practicum_6/numerical_stability.py`.
+3. Реализовать LU-разложение в файле `practicum_6/lu.py`.
+
+Домашнее задание (базовый вариант):
+1. Разложение Холецкого: `practicum_6/homework/basic/cholesky.py`. Необходимо реализовать функцию `cholesky`, возвращающую нижнюю треугольную матрицу, и убедиться, что разложение Холецкого работает корректно, то есть перемножение `L @ L.T` дает исходную матрицу.
+
+Домашнее задание (продвинутый вариант):
+1. LU-разложение для реальных матриц: `practicum_6/homework/advanced/lu.py`. Необходимо наиболее эффективным образом реализовать функции `lu` и `solve` и протестировать их работоспособность на ряде матриц, взятых из практических задач, связанных с химической кинетикой, упругостью, гидродинамикой, экономикой и т.д. Под эффективностью LU-разложения подразумевается одновременно и скорость работы, и вычислительная точность разложения, выраженная в точности решения СЛАУ с произвольным вектором `b`. Точность решения СЛАУ оценивается относительно LU-разложения, реализованного в `scipy`. Скорость работы и точность решения СЛАУ выводятся на экран автоматически. Тестовые матрицы можно скачать здесь: https://drive.google.com/file/d/1VQClvicVQdw0hQgCDzckYu3pAKB7yzCH/view?usp=sharing . Их следует разместить в директории `practicum_6/homework/advanced/matrices`. Справочная информация о матрицах находится в файле `practicum_6/homework/advanced/matrix_details.md`. Для более эффективного LU-разложения вы можете использовать внешнюю информацию о матрице (например, степень ее разреженности и факт симметричности).
+
+Дедлайн: 2024.05.04
+
+## Practicum 7
+
+Изучение прямых и итерационных методов нахождения собственных чисел и собственных векторов квадратных матриц.
+
+План:
+1. ХХХ.
+2. ХХХ.
+3. ХХХ.
+
+Домашнее задание (базовый вариант):
+1. ХХХ.
+
+Домашнее задание (продвинутый вариант):
+1. ХХХ.
+
+Дедлайн: 2024.05.11
+
+## Practicum 8
+
+Изучение итерационных методов решения СЛАУ (методы Якоби и Гаусса-Зейделя, метод сопряженных градиентов, GMRES) и итерационное улучшение.
+
+План:
+1. ХХХ.
+2. ХХХ.
+3. ХХХ.
+
+## Practicum 9
+
+Изучение приложений численной линейной алгебры (МНК, устойчивость линейных систем, задача упругости).
+
+План:
+1. ХХХ.
+2. ХХХ.
+3. ХХХ.
