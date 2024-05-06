@@ -6,3 +6,4 @@ from numpy.typing import NDArray
 
 ProblemCase = namedtuple("ProblemCase", "input, output")
 NDArrayInt = NDArray[np.int_]
+NDArrayFloat = NDArray[np.float_]
