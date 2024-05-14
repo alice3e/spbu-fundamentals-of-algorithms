@@ -14,28 +14,6 @@ Go to `Run and Debug` in the left panel, create a new launch file, select `Pytho
 }
 ```
 
-### MacOs (homebrew or python.app)
-Go to `Terminal.app` and paste this command:
-```bash
-export PYTHONPATH=/Users/path_to_your_github_clone_directory:$PYTHONPATH
-```
-### MacOs (anaconda3 or miniconda)
-Go to `Terminal.app` and paste this command:
-```bash
-conda install conda-build
-conda develop /Users/path_to_your_github_clone_directory
-```
-Then you can check you PYTHONPATH with this command
-```bash
-python -c "import sys; print('\n'.join(sys.path))"
-```
-*Note: python inside your console and inside your PyCharm/Jupyter/DataSpell may be different so run commands in terminal of this app*
-
-Another way to check your PYTHONPATH (most accurate)
-paste this code (first line) in some .py file (for example: practicum_2/dfs.py ) and run the file
-```python
-print(sys.path) # you should see /Users/path_to_your_github_clone_directory
-```
 ## Practicum 1
 
 Изучение `python`, `numpy` и  `matplotlib`, необходимых для дальнейшей работы. Предполагается, что студент имеет базовые знания python.
@@ -124,26 +102,26 @@ print(sys.path) # you should see /Users/path_to_your_github_clone_directory
 Изучение прямых и итерационных методов нахождения собственных чисел и собственных векторов квадратных матриц.
 
 План:
-1. ХХХ.
-2. ХХХ.
-3. ХХХ.
+1. Реализовать power method в файле `practicum_7/power_method.py`.
+2. Реализовать QR и поиск собственных числе с его помощью в файле `practicum_7/qr.py`.
+3. Реализовать итерацию Арнольди в файле `practicum_7/arnoldi.py`.
 
 Домашнее задание (базовый вариант):
-1. ХХХ.
+1. Inverse power method для нахождения наименьшего по модулю собственного числа: `practicum_7/homework/basic/inverse_power_method.py`. Необходимо реализовать power method и воспользоваться им для нахождения наименьшего по модулю собственного числа. Для этого достаточно рассмотреть обратную матрицу.
 
 Домашнее задание (продвинутый вариант):
-1. ХХХ.
+1. Нахождения всех собственных чисел произвольных матриц: `practicum_7/homework/advanced/all_eigenvalues.py`. Необходимо реализовать эффективный с точки зрения времени и точности алгоритм, возвращающий все собственные числа матрицы. Возможна реализация мета-алгоритма, который выбирает наиболее подходящий базовый алгоритм (power method, Arnoldi, Lanczos), исходя из свойств матрицы. Следует протестировать полученный алгоритм на тестовых матрицах из предыдущей практики.
 
-Дедлайн: 2024.05.11
+Дедлайн: 2024.05.18
 
 ## Practicum 8
 
-Изучение итерационных методов решения СЛАУ (методы Якоби и Гаусса-Зейделя, метод сопряженных градиентов, GMRES) и итерационное улучшение.
+Изучение итерационных методов решения СЛАУ (методы Якоби и Гаусса-Зейделя, метод сопряженных градиентов) и итерационное улучшение.
 
 План:
-1. ХХХ.
-2. ХХХ.
-3. ХХХ.
+1. Реализовать метод Якоби, метод Гаусса-Зейделя и метод релаксации в файле `practicum_8/fixed_point_iteration.py`.
+2. Реализовать метод сопряженных градиентов и его предобусловленную версию в файле `practicum_8/conjugate_gradient_method.py`.
+3. Реализовать итерационное улучшение в файле `practicum_8/iterative_refinement.py`.
 
 ## Practicum 9
 
