@@ -65,5 +65,44 @@
     <img src="images/matrix_for_qr_2.png" alt="Image 1" width="300" style="margin-right: 10px;" />
 </p>
 
-# Вывод
+# Выводы
 
+Как показала практика, единственными адекватными методами для матриц такой размерности являются алгоритмы основанные на QR-разложении. Их существует бесконечно много, поэтому нет какого-то одного лучшего. Поэтому для решения этой задачи был выбран **QR-алгоритм + QR-разложение через матрицы Хаусхолдера**
+
+## P.S.
+некоторые методы показали намного болюю точность при решении какой-то одной конкретной матрицы. Но из-за ограничения на сигнатуру функции и запрет изминений тестирующих функций не удалось реализовать механизм выбора определенного алгоритма под каждую матрицу
+
+# Финальные результаты
+
+Result summary:
+Matrix: bp__1000.mtx.gz. Average time: 1.21e+02 seconds. Relative error: 7.88e-01
+
+Matrix: e05r0100.mtx.gz. Average time: 8.20e+00 seconds. Relative error: 7.82e-02
+
+Matrix: fs_541_1.mtx.gz. Average time: 4.91e+01 seconds. Relative error: 4.09e-04
+
+Matrix: fs_680_1.mtx.gz. Average time: 7.75e+01 seconds. Relative error: 1.39e-08
+
+Matrix: gre_1107.mtx.gz. Average time: 2.59e+02 seconds. Relative error: 7.27e-01
+
+Matrix: hor__131.mtx.gz. Average time: 3.16e+01 seconds. Relative error: 4.26e-01
+
+Matrix: impcol_c.mtx.gz. Average time: 2.62e+00 seconds. Relative error: 6.52e-01
+
+Matrix: impcol_d.mtx.gz. Average time: 3.05e+01 seconds. Relative error: 8.21e-01
+
+Matrix: impcol_e.mtx.gz. Average time: 7.46e+00 seconds. Relative error: 7.61e-01
+
+Matrix: jpwh_991.mtx.gz. Average time: 2.10e+02 seconds. Relative error: 2.02e-03
+
+Matrix: lns__511.mtx.gz. Average time: 4.51e+01 seconds. Relative error: 9.01e-01
+
+Matrix: mahindas.mtx.gz. Average time: 3.61e+02 seconds. Relative error: 8.74e-01
+
+Matrix: mcca.mtx.gz. Average time: 4.54e+00 seconds. Relative error: 8.35e-02
+
+Matrix: mcfe.mtx.gz. Average time: 1.01e+02 seconds. Relative error: 5.10e-02
+
+Matrix: nos5.mtx.gz. Average time: 3.52e+01 seconds. Relative error: 4.30e-03
+
+Matrix: orsirr_1.mtx.gz. Average time: 2.16e+02 seconds. Relative error: 3.91e-02
