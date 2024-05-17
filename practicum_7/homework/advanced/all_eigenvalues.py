@@ -18,14 +18,30 @@ class Performance:
     time: float = 0.0
     relative_error: float = 0.0
 
+def Gram_Schmidt_optimised_QR(A: np.array):
+    """
+    Optimized Gram-Schmidt process with normalization.
+    The coefficients q will be calculated at each step of the algorithm.
+    Each time we will subtract the component of the vector from all the vectors q at once.
+    """
+    m, n = A.shape  # Get both dimensions of A
+    Q = A.copy()
+    R = np.zeros((n, n))  # Initialize R with zeros
 
-def get_all_eigenvalues(A: NDArrayFloat) -> NDArrayFloat:
+    for k in range(n): # Orthogonalize the k-th column
+        R[k, k] = np.linalg.norm(Q[:, k]) # Normalize the k-th column
+        Q[:, k] /= R[k, k] 
+        for j in range(k + 1, n): # Subtract the projection from subsequent columns 
+            R[k, j] = np.dot(Q[:, k], Q[:, j])
+            Q[:, j] -= R[k, j] * Q[:, k] 
+    return Q, R
 
-    ##########################
-    ### PUT YOUR CODE HERE ###
-    ##########################
-
-    pass
+def get_all_eigenvalues(A):
+    A_k = A.copy()
+    for k in range(50):
+        Q,R = Gram_Schmidt_optimised_QR(A_k)
+        A_k = R @ Q
+    return np.diag(A_k).copy()
 
 
 def run_test_cases(
@@ -46,8 +62,15 @@ def run_test_cases(
         perf.time += t2 - t1
         eigvals_exact.sort()
         eigvals.sort()
-        perf.relative_error = np.median(
+        relative_error = np.median(
             np.abs(eigvals_exact - eigvals) / np.abs(eigvals_exact)
+        )
+        perf.relative_error = relative_error
+        print("matrix summary:")
+        print(
+            f"Matrix: {matrix_filename}. "
+            f"Average time: {(t2 - t1):.2e} seconds. "
+            f"Relative error: {relative_error:.2e}"
         )
     return performance_by_matrix
 
