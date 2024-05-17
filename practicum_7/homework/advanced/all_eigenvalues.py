@@ -18,7 +18,7 @@ class Performance:
     time: float = 0.0
     relative_error: float = 0.0
 
-def Gram_Schmidt_optimised_QR(A: np.array):
+def qr_decomposition(A: np.array):
     """
     Optimized Gram-Schmidt process with normalization.
     The coefficients q will be calculated at each step of the algorithm.
@@ -36,13 +36,35 @@ def Gram_Schmidt_optimised_QR(A: np.array):
             Q[:, j] -= R[k, j] * Q[:, k] 
     return Q, R
 
-def get_all_eigenvalues(A):
-    A_k = A.copy()
-    for k in range(50):
-        Q,R = Gram_Schmidt_optimised_QR(A_k)
-        A_k = R @ Q
-    return np.diag(A_k).copy()
 
+def get_all_eigenvalues(A: NDArrayFloat) -> NDArrayFloat:
+    """
+    Computes eigenvalues of a real square matrix using the QR algorithm with shifts.
+
+    Args:
+        A: The input real square matrix.
+        tol: Tolerance for convergence.
+        max_iter: Maximum number of iterations.
+
+    Returns:
+        eigenvalues: A 1D NumPy array containing the eigenvalues of A.
+    """
+    max_iter = 50
+    n = A.shape[0]
+    for _ in range(max_iter):
+        # Apply shifts
+        H = np.zeros((n, n))
+        H[n-1, n-1] = A[n-1, n-1]
+        shift = H[n-1, n-1]
+
+        # QR decomposition with shifts (using your existing function)
+        Q, R = qr_decomposition(A - shift * np.eye(n))
+
+        # Update A
+        A = np.dot(R, Q) + shift * np.eye(n)  # Apply the shift back
+
+    eigenvalues = np.diag(A).copy()
+    return eigenvalues
 
 def run_test_cases(
     path_to_homework: str, path_to_matrices: str
