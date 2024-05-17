@@ -2,9 +2,9 @@
 
 ## 1) **testing_np_linalg_eig.ipynb**
 >  Во время тестрирования своих алгоритмов, я построил график который показывал величину найденного собственного числа в соответстивии с его индексом. Была замечени странность - несколько чисел были в 1000-10000 раз больше всех остальных собственных чисел на практически любой исследуемой матрицей. Посоветовавшись с Дегятревым А.Б. и Утешевым А.Ю., я решил перепроверить правильность написания кода. Действительно, несколько собственных чисел большинства матриц (заданных случайно) по модулю больше на несколько порядков всего отсального множества. Данный файл подтверждает это наблюдение.
-> <p float="left">
-  <img src="image1.png" alt="Image 1" width="300" style="margin-right: 10px;" />
-  <img src="image2.png" alt="Image 2" width="300" />
+<p float="left">
+  <img src="image1.png" alt="Image 1" width="200" style="margin-right: 10px;" />
+  <img src="image2.png" alt="Image 2" width="200" />
 </p>
 
 ## 2) **qr_algos_battle.ipynb**
@@ -27,5 +27,5 @@
     <img src="matrix_for_qr_5.png" alt="Image 1" width="200" style="margin-right: 10px;" />
     <img src="matrix_for_qr_6.png" alt="Image 1" width="200" style="margin-right: 10px;" />
     <img src="matrix_for_qr_7.png" alt="Image 1" width="200" style="margin-right: 10px;" />
-
+</p>
 ### Результаты
