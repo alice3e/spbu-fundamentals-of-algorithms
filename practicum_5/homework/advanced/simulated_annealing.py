@@ -98,7 +98,7 @@ def solve_via_simulated_annealing (G: nx.Graph, n_max_colors: int, initial_color
         conflicts_list[current_iteration] = number_of_conflicts(G,cur_colors)
         current_iteration += 1
 
-    return cur_colors
+    return conflicts_list
 
 if __name__ == "__main__":
     MIN_TEMP = 0.0001
@@ -128,8 +128,8 @@ if __name__ == "__main__":
     # ----------------------
     
     final_coloring = solve_via_simulated_annealing(G, n_max_colors, initial_colors, n_max_iters)
-    print(f'FINAL NUMBER OF CONFLICTS = {conflicts_list[-1]}')
-
+    print(f'FINAL NUMBER OF CONFLICTS = {final_coloring[-1]}')
+    #print(final_coloring)
 
 
     # only for chart drawings
