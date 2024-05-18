@@ -45,10 +45,10 @@ def has_cycles_rec(G: nx.DiGraph, starting_node, visited: dict[Any], node_highli
     return flag
 
 def has_cycles(g: nx.DiGraph):
-    visited = {n: False for n in G}  # False - not visited, True - visited
+    visited = {n: False for n in g}  # False - not visited, True - visited
     nodes_to_highlight = []
     edges_to_highlight = []
-    flag_cycles = has_cycles_rec(G, get_keys(visited, False), visited=visited, node_highlight=nodes_to_highlight,
+    flag_cycles = has_cycles_rec(g, get_keys(visited, False), visited=visited, node_highlight=nodes_to_highlight,
                                  edge_highlight=edges_to_highlight)
     return flag_cycles
 
