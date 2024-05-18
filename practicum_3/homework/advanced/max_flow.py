@@ -45,18 +45,17 @@ def weight_change(G: nx.Graph, start_node: Any , end_node:Any, path: list, min_f
     plotting.plot_graph(G,highlighted_edges=edge_higlight)
 
 # Алгоритм Эдмондса — Карпа
-def max_flow(G: nx.Graph, s: Any, e: Any) -> int:
+def max_flow(G: nx.Graph, s: Any, t: Any) -> int:
     value: int = 0
-    cur_flow, path = bfs(G,s,e)
+    cur_flow, path = bfs(G,s,t)
     cur_flow = cur_flow[0]
     while(cur_flow >= 0): #В остаточной сети находим кратчайший путь из источника в сток. Если такого пути нет, останавливаемся.
         value += cur_flow
         print(f'cur_flow = {cur_flow} , path - {path}, value = {value}')
-        weight_change(G,s,e,path,cur_flow)
-        cur_flow, path = bfs(G,s,e)
+        weight_change(G,s,t,path,cur_flow)
+        cur_flow, path = bfs(G,s,t)
         cur_flow = cur_flow[0]
     return value
-
 
 if __name__ == "__main__":
     # Load the graph
