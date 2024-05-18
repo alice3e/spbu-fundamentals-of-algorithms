@@ -75,7 +75,7 @@ def probability(current_temp,delta_conflicts):
 
 def solve_via_simulated_annealing (G: nx.Graph, n_max_colors: int, initial_colors: NDArrayInt, n_iters: int):
     current_iteration = 0
-    global conflicts_list
+    conflicts_list = np.zeros((n_max_iters,), dtype=np.float64)
     MIN_TEMP = 0.0000001
     MAX_TEMP = 500
     current_temp = MAX_TEMP
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     np.random.seed(seed)
     G = nx.erdos_renyi_graph(n=100, p=0.05, seed=seed)
     initial_colors = np.random.randint(low=0, high=n_max_colors - 1, size=len(G.nodes))
-    conflicts_list = np.zeros((n_max_iters,), dtype=np.float64)
+    
     
     
 
@@ -127,8 +127,8 @@ if __name__ == "__main__":
         probab_list[i] = probability(temp,8)
     # ----------------------
     
-    final_coloring = solve_via_simulated_annealing(G, n_max_colors, initial_colors, n_max_iters)
-    print(f'FINAL NUMBER OF CONFLICTS = {final_coloring[-1]}')
+    conflict_list = solve_via_simulated_annealing(G, n_max_colors, initial_colors, n_max_iters)
+    print(f'FINAL NUMBER OF CONFLICTS = {conflict_list[-1]}')
     #print(final_coloring)
 
 
@@ -138,14 +138,14 @@ if __name__ == "__main__":
     y1 = change_list
     y2 = temp_list
     y3 = probab_list
-    y4 = conflicts_list
+    y4 = conflict_list
 
     fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(12,6)) # Создает фигуру и оси ( 2 разных обьекта )
     # Вернет массив 2х2 -> надо выбрать оси
     ax[0,0].plot(x,y1,label="temperature multiplication factor")
     ax[0,1].plot(x,y2 ,label="temperature")
     ax[1,0].plot(x,y3 ,label="probability of random jump")
-    ax[1,1].plot(x,y4 ,label=f'number of conflicts = {conflicts_list[-1]}')
+    ax[1,1].plot(x,y4 ,label=f'number of conflicts = {conflict_list[-1]}')
 
     for axe in ax.reshape(-1):
         axe.grid()
