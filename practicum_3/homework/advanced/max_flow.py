@@ -46,6 +46,8 @@ def weight_change(G: nx.Graph, start_node: Any , end_node:Any, path: list, min_f
 
 # Алгоритм Эдмондса — Карпа
 def max_flow(G: nx.Graph, s: Any, t: Any) -> int:
+    s = str(s)
+    t = str(t)
     value: int = 0
     cur_flow, path = bfs(G,s,t)
     cur_flow = cur_flow[0]
@@ -57,8 +59,9 @@ def max_flow(G: nx.Graph, s: Any, t: Any) -> int:
         cur_flow = cur_flow[0]
     return value
 
+
 if __name__ == "__main__":
     # Load the graph
     G = nx.read_edgelist("practicum_3/homework/advanced/graph_2.edgelist", create_using=nx.DiGraph)
-    val = max_flow(G, s='0', e='5')
+    val = max_flow(G, s='0', t='5')
     print(f"Maximum flow is {val}. Should be 23")
