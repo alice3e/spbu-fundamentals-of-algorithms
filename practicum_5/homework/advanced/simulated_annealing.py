@@ -75,7 +75,7 @@ def probability(current_temp,delta_conflicts):
 
 def solve_via_simulated_annealing (G: nx.Graph, n_max_colors: int, initial_colors: NDArrayInt, n_iters: int):
     current_iteration = 0
-    conflicts_list = np.zeros((n_max_iters,), dtype=np.float64)
+    conflicts_list = np.zeros((n_iters,), dtype=np.float64)
     MIN_TEMP = 0.0000001
     MAX_TEMP = 500
     current_temp = MAX_TEMP
