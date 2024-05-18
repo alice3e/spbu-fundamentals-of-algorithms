@@ -46,8 +46,6 @@ def weight_change(G: nx.Graph, start_node: Any , end_node:Any, path: list, min_f
 
 # Алгоритм Эдмондса — Карпа
 def max_flow(G: nx.Graph, s: Any, t: Any) -> int:
-    s = str(s)
-    t = str(t)
     value: int = 0
     cur_flow, path = bfs(G,s,t)
     cur_flow = cur_flow[0]
