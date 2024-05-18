@@ -9,7 +9,14 @@ import numpy as np
 import scipy.io
 import scipy.linalg
 
-from src.common import NDArrayFloat
+# ---
+from collections import namedtuple
+from numpy.typing import NDArray
+ProblemCase = namedtuple("ProblemCase", "input, output")
+NDArrayInt = NDArray[np.int_]
+NDArrayFloat = NDArray[np.float_]
+# ---
+
 from src.linalg import get_numpy_eigenvalues
 
 
